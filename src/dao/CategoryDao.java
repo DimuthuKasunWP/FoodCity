@@ -33,8 +33,8 @@ public class CategoryDao {
         
     }
     
-    public boolean updateCategory(int id,String name) throws SQLException{
-        String sql="update category set name='"+name+"' where c_id='"+id+"'";
+    public boolean updateCategory(Category category) throws SQLException{
+        String sql="update category set name='"+category.getName()+"' where c_id='"+category.getC_id()+"'";
         Statement stm=connection.createStatement();
         int res = stm.executeUpdate(sql);
         return res>0 ?true:false;

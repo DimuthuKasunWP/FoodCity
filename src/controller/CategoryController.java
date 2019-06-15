@@ -27,9 +27,8 @@ public class CategoryController {
         
     }
     
-    public boolean updateCategory(String name) throws SQLException {
-        Category category = dao.getCategory(name);
-        return dao.updateCategory(category.getC_id(), name);
+    public boolean updateCategory(Category category) throws SQLException {
+        return dao.updateCategory(category);
         
     }
     

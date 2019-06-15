@@ -26,6 +26,7 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() {
         flag=true;
         initComponents();
+        this.setLocationRelativeTo(null);
         controller=new LoginController();
         
     }
@@ -131,6 +132,11 @@ public class MainFrame extends javax.swing.JFrame {
                 txtUserNameFocusGained(evt);
             }
         });
+        txtUserName.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtUserNameMouseClicked(evt);
+            }
+        });
         txtUserName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUserNameActionPerformed(evt);
@@ -171,7 +177,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void txtUserNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtUserNameFocusGained
            
-        if(!flag)
+        if(flag)
         txtUserName.setText("");
         flag=false;
     }//GEN-LAST:event_txtUserNameFocusGained
@@ -195,6 +201,10 @@ public class MainFrame extends javax.swing.JFrame {
          Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
      }
     }//GEN-LAST:event_btnSubmitActionPerformed
+
+    private void txtUserNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUserNameMouseClicked
+        txtUserName.setText("");
+    }//GEN-LAST:event_txtUserNameMouseClicked
 
     /**
      * @param args the command line arguments

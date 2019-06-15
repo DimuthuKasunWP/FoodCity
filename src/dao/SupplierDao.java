@@ -162,14 +162,14 @@ public class SupplierDao {
         
     }
     
-    public boolean deleteSupplier(String name) throws SQLException{
-        Supplier supplier = getSupplier(name);
-        String sql="delete from supplier_mobile where s_id='"+supplier.getS_id()+"'";
+    public boolean deleteSupplier(int  id) throws SQLException{
+//        Supplier supplier = getSupplier(name);
+        String sql="delete from supplier_mobile where s_id='"+id+"'";
         Statement stm=connection.createStatement();
         int res = stm.executeUpdate(sql);
         if(res>0){
             
-            sql="delete from supplier where s_id='"+supplier.getS_id()+"'";
+            sql="delete from supplier where s_id='"+id+"'";
             stm=connection.createStatement();
             int executeUpdate = stm.executeUpdate(sql);
             if(executeUpdate>0){

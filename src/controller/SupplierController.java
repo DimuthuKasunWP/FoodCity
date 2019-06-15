@@ -41,9 +41,9 @@ public class SupplierController {
         return dao.getAll();
     }
     
-    public boolean deleteSupplier(String name) throws SQLException{
+    public boolean deleteSupplier(int id) throws SQLException{
         
-        return dao.deleteSupplier(name);
+        return dao.deleteSupplier(id);
         
     }
     
