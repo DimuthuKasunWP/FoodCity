@@ -20,6 +20,9 @@ public class SupplierController {
     public SupplierController() {
         dao=new SupplierDao();
     }
+    public Supplier getSupplierByID(int id)throws  SQLException{
+        return dao.getSupplierByID(id);
+    }
     
     public boolean addSupplier(Supplier supplier) throws SQLException{
        

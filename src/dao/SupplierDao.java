@@ -89,6 +89,27 @@ public class SupplierDao {
         
     }
     
+    public Supplier getSupplierByID(int id) throws SQLException{
+        
+        Supplier supplier=new Supplier();
+        String sql="select * from supplier where s_id='"+id+"'";
+        PreparedStatement stm=connection.prepareStatement(sql);
+        ResultSet rst = stm.executeQuery();
+        while(rst.next()){
+            supplier.setS_id(rst.getInt("s_id"));
+            supplier.setName(rst.getString("name"));
+            sql="select * from supplier_mobile where s_id='"+id+"'";
+            PreparedStatement stm2=connection.prepareStatement(sql);
+            ResultSet executeQuery = stm2.executeQuery();
+            ArrayList<String> list=new ArrayList<>();
+            while(executeQuery.next()){
+                list.add(executeQuery.getString("mobile"));
+            }
+            supplier.setMobile(list);
+        }
+        return supplier;
+    }
+    
     public List<Supplier> getAll() throws SQLException{
         
         String sql="select * from supplier";

@@ -5,17 +5,59 @@
  */
 package view;
 
+import controller.BatchController;
+import controller.SupplierController;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.Batch;
+import model.Supplier;
+
 /**
  *
  * @author kasun
  */
 public class AddBatchForm extends javax.swing.JFrame {
-
+    private SupplierController supplierController;
+    private BatchController controller;
     /**
      * Creates new form AddBatchForm
      */
     public AddBatchForm() {
+        supplierController=new SupplierController();
+        controller=new BatchController();
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setSize(1097,794);
+        loadTable();
+        Date date = new Date();
+        String strDateFormat = "hh:mm:ss a";
+        DateFormat dateFormat = new SimpleDateFormat(strDateFormat);
+        String formattedDate= dateFormat.format(date);
+
+        txtDate.setText(formattedDate);
+        
+        
+    }
+    
+    private void loadTable(){
+        try {
+            DefaultTableModel dtm=(DefaultTableModel) tblSupplier.getModel();
+            List<Supplier> all = supplierController.getAll();
+            for (Supplier supplier : all) {
+                Object [] row={supplier.getS_id(),supplier.getName(),supplier.getMobile().get(0)};
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AddBatchForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
     /**
@@ -29,16 +71,15 @@ public class AddBatchForm extends javax.swing.JFrame {
 
         pnlBase = new javax.swing.JPanel();
         lblTitle = new javax.swing.JLabel();
-        txtMobile2 = new javax.swing.JTextField();
+        txtDate = new javax.swing.JTextField();
         sepFour = new javax.swing.JSeparator();
-        lblMobile = new javax.swing.JLabel();
-        txtName = new javax.swing.JTextField();
-        sepFour1 = new javax.swing.JSeparator();
-        lblName = new javax.swing.JLabel();
-        lblPlus = new javax.swing.JLabel();
-        txtMobile1 = new javax.swing.JTextField();
-        sepFour2 = new javax.swing.JSeparator();
+        lblDate = new javax.swing.JLabel();
+        lblSupplierID = new javax.swing.JLabel();
         btnSubmit = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblSupplier = new javax.swing.JTable();
+        txtSupplierName = new javax.swing.JTextField();
+        sepFour3 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -50,96 +91,41 @@ public class AddBatchForm extends javax.swing.JFrame {
         lblTitle.setForeground(new java.awt.Color(255, 255, 255));
         lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitle.setText("Add New Batch");
-        pnlBase.add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 10, 410, 110));
+        pnlBase.add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 10, 410, 110));
 
-        txtMobile2.setBackground(new java.awt.Color(153, 0, 153));
-        txtMobile2.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
-        txtMobile2.setForeground(new java.awt.Color(255, 255, 255));
-        txtMobile2.setText("Enter mobile number here");
-        txtMobile2.setToolTipText("");
-        txtMobile2.setBorder(null);
-        txtMobile2.setDisabledTextColor(new java.awt.Color(204, 204, 204));
-        txtMobile2.setEnabled(false);
-        txtMobile2.addFocusListener(new java.awt.event.FocusAdapter() {
+        txtDate.setBackground(new java.awt.Color(153, 0, 153));
+        txtDate.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        txtDate.setForeground(new java.awt.Color(255, 255, 255));
+        txtDate.setToolTipText("");
+        txtDate.setBorder(null);
+        txtDate.setDisabledTextColor(new java.awt.Color(204, 204, 204));
+        txtDate.setEnabled(false);
+        txtDate.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                txtMobile2FocusGained(evt);
+                txtDateFocusGained(evt);
             }
         });
-        txtMobile2.addActionListener(new java.awt.event.ActionListener() {
+        txtDate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtMobile2ActionPerformed(evt);
+                txtDateActionPerformed(evt);
             }
         });
-        pnlBase.add(txtMobile2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 280, 320, 30));
-        pnlBase.add(sepFour, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 310, 320, 10));
+        pnlBase.add(txtDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 490, 320, 30));
+        pnlBase.add(sepFour, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 520, 320, 10));
 
-        lblMobile.setBackground(new java.awt.Color(255, 255, 255));
-        lblMobile.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
-        lblMobile.setForeground(new java.awt.Color(255, 255, 255));
-        lblMobile.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblMobile.setText("Mobile");
-        pnlBase.add(lblMobile, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, 230, 80));
+        lblDate.setBackground(new java.awt.Color(255, 255, 255));
+        lblDate.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        lblDate.setForeground(new java.awt.Color(255, 255, 255));
+        lblDate.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblDate.setText("Date");
+        pnlBase.add(lblDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 470, 230, 80));
 
-        txtName.setBackground(new java.awt.Color(153, 0, 153));
-        txtName.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
-        txtName.setForeground(new java.awt.Color(255, 255, 255));
-        txtName.setText("Enter Name Here");
-        txtName.setToolTipText("");
-        txtName.setBorder(null);
-        txtName.setDisabledTextColor(new java.awt.Color(204, 204, 204));
-        txtName.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txtNameFocusGained(evt);
-            }
-        });
-        txtName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNameActionPerformed(evt);
-            }
-        });
-        pnlBase.add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 140, 400, 30));
-        pnlBase.add(sepFour1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 170, 320, 10));
-
-        lblName.setBackground(new java.awt.Color(255, 255, 255));
-        lblName.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
-        lblName.setForeground(new java.awt.Color(255, 255, 255));
-        lblName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblName.setText("Name");
-        pnlBase.add(lblName, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 230, 80));
-
-        lblPlus.setBackground(new java.awt.Color(51, 0, 255));
-        lblPlus.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        lblPlus.setForeground(new java.awt.Color(255, 255, 255));
-        lblPlus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblPlus.setText("Add");
-        lblPlus.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        lblPlus.setOpaque(true);
-        lblPlus.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblPlusMouseClicked(evt);
-            }
-        });
-        pnlBase.add(lblPlus, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 210, 70, 30));
-
-        txtMobile1.setBackground(new java.awt.Color(153, 0, 153));
-        txtMobile1.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
-        txtMobile1.setForeground(new java.awt.Color(255, 255, 255));
-        txtMobile1.setText("Enter mobile number here");
-        txtMobile1.setToolTipText("");
-        txtMobile1.setBorder(null);
-        txtMobile1.setDisabledTextColor(new java.awt.Color(204, 204, 204));
-        txtMobile1.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txtMobile1FocusGained(evt);
-            }
-        });
-        txtMobile1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtMobile1ActionPerformed(evt);
-            }
-        });
-        pnlBase.add(txtMobile1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 210, 320, 30));
-        pnlBase.add(sepFour2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 240, 320, 10));
+        lblSupplierID.setBackground(new java.awt.Color(255, 255, 255));
+        lblSupplierID.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        lblSupplierID.setForeground(new java.awt.Color(255, 255, 255));
+        lblSupplierID.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblSupplierID.setText("Supplier Name");
+        pnlBase.add(lblSupplierID, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 390, 230, 80));
 
         btnSubmit.setBackground(new java.awt.Color(0, 0, 102));
         btnSubmit.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
@@ -150,75 +136,118 @@ public class AddBatchForm extends javax.swing.JFrame {
                 btnSubmitActionPerformed(evt);
             }
         });
-        pnlBase.add(btnSubmit, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 390, 120, 50));
+        pnlBase.add(btnSubmit, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 660, 120, 50));
+
+        tblSupplier.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        tblSupplier.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        tblSupplier.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Supplier Id", "Name", "mobile"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        tblSupplier.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblSupplierMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblSupplier);
+
+        pnlBase.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, 910, 210));
+
+        txtSupplierName.setBackground(new java.awt.Color(153, 0, 153));
+        txtSupplierName.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        txtSupplierName.setForeground(new java.awt.Color(255, 255, 255));
+        txtSupplierName.setToolTipText("");
+        txtSupplierName.setBorder(null);
+        txtSupplierName.setDisabledTextColor(new java.awt.Color(204, 204, 204));
+        txtSupplierName.setEnabled(false);
+        txtSupplierName.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtSupplierNameFocusGained(evt);
+            }
+        });
+        txtSupplierName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSupplierNameActionPerformed(evt);
+            }
+        });
+        pnlBase.add(txtSupplierName, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 410, 320, 30));
+        pnlBase.add(sepFour3, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 440, 320, 10));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlBase, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlBase, javax.swing.GroupLayout.DEFAULT_SIZE, 1097, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlBase, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pnlBase, javax.swing.GroupLayout.DEFAULT_SIZE, 730, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtMobile2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtMobile2FocusGained
-        txtMobile2.setText("");
+    private void txtDateFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDateFocusGained
+        txtDate.setText("");
         //        if(!flag)
         //        txtMobile.setText("");
         //        flag=false;
-    }//GEN-LAST:event_txtMobile2FocusGained
+    }//GEN-LAST:event_txtDateFocusGained
 
-    private void txtMobile2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMobile2ActionPerformed
+    private void txtDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDateActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtMobile2ActionPerformed
-
-    private void txtNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNameFocusGained
-        txtName.setText("");
-    }//GEN-LAST:event_txtNameFocusGained
-
-    private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNameActionPerformed
-
-    private void lblPlusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblPlusMouseClicked
-        txtMobile2.setEnabled(true);
-    }//GEN-LAST:event_lblPlusMouseClicked
-
-    private void txtMobile1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtMobile1FocusGained
-        txtMobile1.setText("");
-    }//GEN-LAST:event_txtMobile1FocusGained
-
-    private void txtMobile1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMobile1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtMobile1ActionPerformed
+    }//GEN-LAST:event_txtDateActionPerformed
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
-//        try {
-//            String name = txtName.getText();
-//            String mob1=txtMobile1.getText();
-//            String mob2=txtMobile2.getText();
-//            ArrayList array=new ArrayList();
-//            array.add(mob1);
-//            array.add(mob2);
-//            boolean isAdded = controller.addSupplier(new Supplier(0, name,array ));
-//            if(isAdded)
-//            this.setVisible(false);
-//            else{
-//                JOptionPane.showMessageDialog(this,"Added Failed", "Something went wrong", JOptionPane.ERROR);
-//                txtName.setText("");
-//                txtMobile1.setText("");
-//                txtMobile2.setText("");
-//            }
-//
-//        } catch (SQLException ex) {
-//            Logger.getLogger(AddSupplierForm.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        if(tblSupplier.getSelectedRow()==0){
+            JOptionPane.showMessageDialog(this,"warning","select a table row",JOptionPane.WARNING_MESSAGE);
+        }else if(tblSupplier.getSelectedRow()>1){
+            JOptionPane.showMessageDialog(this,"warning","select only one table row",JOptionPane.WARNING_MESSAGE);
+        }else{
+            try {
+                Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                
+                DefaultTableModel dtm= (DefaultTableModel) tblSupplier.getModel();
+                int id = (int) dtm.getValueAt(tblSupplier.getSelectedRow(), 0);
+                
+                controller.addBatch(txtSupplierName.getText(), new Batch(0,id ,timestamp));
+            } catch (SQLException ex) {
+                Logger.getLogger(AddBatchForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        
     }//GEN-LAST:event_btnSubmitActionPerformed
+
+    private void txtSupplierNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSupplierNameFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSupplierNameFocusGained
+
+    private void txtSupplierNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSupplierNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSupplierNameActionPerformed
+
+    private void tblSupplierMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSupplierMouseClicked
+        DefaultTableModel dtm= (DefaultTableModel) tblSupplier.getModel();
+        String  name= (String) dtm.getValueAt(tblSupplier.getSelectedRow(), 1);
+        txtSupplierName.setText(name);
+        
+        
+    }//GEN-LAST:event_tblSupplierMouseClicked
 
     /**
      * @param args the command line arguments
@@ -257,16 +286,15 @@ public class AddBatchForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSubmit;
-    private javax.swing.JLabel lblMobile;
-    private javax.swing.JLabel lblName;
-    private javax.swing.JLabel lblPlus;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblDate;
+    private javax.swing.JLabel lblSupplierID;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JPanel pnlBase;
     private javax.swing.JSeparator sepFour;
-    private javax.swing.JSeparator sepFour1;
-    private javax.swing.JSeparator sepFour2;
-    private javax.swing.JTextField txtMobile1;
-    private javax.swing.JTextField txtMobile2;
-    private javax.swing.JTextField txtName;
+    private javax.swing.JSeparator sepFour3;
+    private javax.swing.JTable tblSupplier;
+    private javax.swing.JTextField txtDate;
+    private javax.swing.JTextField txtSupplierName;
     // End of variables declaration//GEN-END:variables
 }

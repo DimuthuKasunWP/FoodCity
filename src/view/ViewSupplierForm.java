@@ -168,11 +168,12 @@ public class ViewSupplierForm extends javax.swing.JFrame {
             JFrame frame= new DeleteSupplierForm(sup);
             frame.setVisible(true);
         }
+        loadTable();
             
     }//GEN-LAST:event_lblDeleteMouseClicked
 
     private void lblUpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblUpdateMouseClicked
-DefaultTableModel dtm=(DefaultTableModel) tblSuppliers.getModel();
+    DefaultTableModel dtm=(DefaultTableModel) tblSuppliers.getModel();
         if(tblSuppliers.getSelectedRowCount()>0){
             JOptionPane.showMessageDialog(this, "select only one row at time", "Warning", JOptionPane.WARNING_MESSAGE);
         }
@@ -195,7 +196,7 @@ DefaultTableModel dtm=(DefaultTableModel) tblSuppliers.getModel();
             JFrame frame= new UpdateSupplierForm(sup);
             frame.setVisible(true);
         }
-            
+           loadTable(); 
     }//GEN-LAST:event_lblUpdateMouseClicked
 
     /**
