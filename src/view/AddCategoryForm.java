@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
  * @author kasun
  */
 public class AddCategoryForm extends javax.swing.JFrame {
-    private CategoryController controller=null;
+    private CategoryController controller=new CategoryController();
     /**
      * Creates new form AddCategoryForm
      */

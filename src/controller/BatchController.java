@@ -25,7 +25,7 @@ public class BatchController {
     }
     
     
-    public boolean addBatch(String supplier,Batch batch) throws SQLException{
+    public boolean addBatch(int supplier,Batch batch) throws SQLException{
         return dao.addBatch(supplier, batch);
         
     }
@@ -42,8 +42,8 @@ public class BatchController {
         
         return dao.getBatchByBID(bid);
     }
-    public List<Batch> getBatchesBySID(String name) throws SQLException{
-        Supplier supplier = supDao.getSupplier(name);
+    public List<Batch> getBatchesBySID(int s_id) throws SQLException{
+        Supplier supplier = supDao.getSupplier(s_id);
         return dao.getBatchesBySID(supplier.getS_id());
     }
     

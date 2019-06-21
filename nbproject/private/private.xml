@@ -3,24 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/Thogakade-System/Thogakade-System/src/model/Batch.java</file>
-            <file>file:/E:/Thogakade-System/Thogakade-System/src/model/Login.java</file>
-            <file>file:/E:/Thogakade-System/Thogakade-System/src/dao/CategoryDao.java</file>
-            <file>file:/E:/Thogakade-System/Thogakade-System/src/dao/SupplierDao.java</file>
-            <file>file:/E:/Thogakade-System/Thogakade-System/src/dao/BatchDao.java</file>
-            <file>file:/E:/Thogakade-System/Thogakade-System/src/controller/BatchController.java</file>
-            <file>file:/E:/Thogakade-System/Thogakade-System/src/model/Supplier.java</file>
-            <file>file:/E:/Thogakade-System/Thogakade-System/src/model/Category.java</file>
-            <file>file:/E:/Thogakade-System/Thogakade-System/Settings/dbSettings.properties</file>
-            <file>file:/E:/Thogakade-System/Thogakade-System/src/controller/SupplierController.java</file>
-            <file>file:/E:/Thogakade-System/Thogakade-System/src/connection/DBConnection.java</file>
-            <file>file:/E:/Thogakade-System/Thogakade-System/src/controller/CategoryController.java</file>
-            <file>file:/E:/Thogakade-System/Thogakade-System/src/controller/LoginController.java</file>
-            <file>file:/E:/Thogakade-System/Thogakade-System/src/model/Item.java</file>
-            <file>file:/E:/Thogakade-System/Thogakade-System/src/dao/LoginDao.java</file>
-            <file>file:/E:/Thogakade-System/Thogakade-System/src/view/MainFrame.java</file>
-            <file>file:/E:/Thogakade-System/Thogakade-System/src/model/Orders.java</file>
-            <file>file:/E:/Thogakade-System/Thogakade-System/src/view/DashBoard.java</file>
+            <file>file:/C:/Users/Benura/Documents/Food-City/FoodCity/src/model/Category.java</file>
+            <file>file:/C:/Users/Benura/Documents/Food-City/FoodCity/src/view/DashBoard.java</file>
+            <file>file:/C:/Users/Benura/Documents/Food-City/FoodCity/src/view/MainFrame.java</file>
+            <file>file:/C:/Users/Benura/Documents/Food-City/FoodCity/src/dao/LoginDao.java</file>
+            <file>file:/C:/Users/Benura/Documents/Food-City/FoodCity/src/dao/SupplierDao.java</file>
+            <file>file:/C:/Users/Benura/Documents/Food-City/FoodCity/src/model/Item.java</file>
+            <file>file:/C:/Users/Benura/Documents/Food-City/FoodCity/src/model/Login.java</file>
+            <file>file:/C:/Users/Benura/Documents/Food-City/FoodCity/src/dao/BatchDao.java</file>
+            <file>file:/C:/Users/Benura/Documents/Food-City/FoodCity/src/dao/CategoryDao.java</file>
+            <file>file:/C:/Users/Benura/Documents/Food-City/FoodCity/src/model/Batch.java</file>
         </group>
     </open-files>
 </project-private>

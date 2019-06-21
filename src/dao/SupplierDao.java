@@ -40,7 +40,7 @@ public class SupplierDao {
             if(res>0){
                 ArrayList<String> list = supplier.getMobile();
                 for (String string : list) {
-                   sql="insert into supplier_mobile values('"+getSupplier(supplier.getName()).getS_id()+"','"+string+"') " ;
+                   sql="insert into supplier_mobile values('"+getSupplier(supplier.getS_id())+"','"+string+"') " ;
                    Statement stm2= connection.createStatement();   
                    res=stm.executeUpdate(sql);
                    if(res>0){
@@ -68,15 +68,15 @@ public class SupplierDao {
         
     }
     
-    public Supplier getSupplier(String name) throws SQLException{
+    public Supplier getSupplier(int id) throws SQLException{
         Supplier supplier=new Supplier();
-        String sql="select * from supplier where name='"+name+"'";
+        String sql="select * from supplier where s_id='"+id+"'";
         PreparedStatement stm=connection.prepareStatement(sql);
         ResultSet rst = stm.executeQuery();
         while(rst.next()){
             supplier.setS_id(rst.getInt("s_id"));
-            supplier.setName(name);
-            sql="select * from supplier_mobile where s_id='"+rst.getInt("s_id")+"'";
+            supplier.setName(rst.getString("name"));
+            sql="select * from supplier_mobile where s_id='"+id+"'";
             PreparedStatement stm2=connection.prepareStatement(sql);
             ResultSet executeQuery = stm2.executeQuery();
             ArrayList<String> list=new ArrayList<>();
@@ -116,7 +116,7 @@ public class SupplierDao {
     
     public boolean update(Supplier supplier) throws SQLException {
         try {
-            Supplier value = getSupplier(supplier.getName());
+            Supplier value = getSupplier(supplier.getS_id());
             connection.setAutoCommit(false);
             String sql="update supplier set name='"+value.getName()+"' where s_id='"+value.getS_id()+"'";
             Statement stm= connection.createStatement();
@@ -128,7 +128,7 @@ public class SupplierDao {
                 int executeUpdate = stm.executeUpdate(sql);
                 if(executeUpdate>0){
                     for (String string : mobileList) {
-                        sql="insert into supplier_mobile values('"+getSupplier(supplier.getName()).getS_id()+"','"+string+"') " ;
+                        sql="insert into supplier_mobile values('"+getSupplier(supplier.getS_id())+"','"+string+"') " ;
                         Statement stm2= connection.createStatement();
                         res=stm.executeUpdate(sql);
                         if(res>0){

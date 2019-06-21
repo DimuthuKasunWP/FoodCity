@@ -56,11 +56,6 @@
           </Layout>
           <SubComponents>
             <Component class="javax.swing.JLabel" name="lblCart">
-              <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="E:\Thogakade-System\Thogakade-System\Assets\Shopping-Cart-Icon.png"/>
-                </Property>
-              </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="160" y="260" width="-1" height="-1"/>
@@ -118,7 +113,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="650" y="0" width="650" height="750"/>
+              <AbsoluteConstraints x="650" y="-100" width="650" height="750"/>
             </Constraint>
           </Constraints>
 

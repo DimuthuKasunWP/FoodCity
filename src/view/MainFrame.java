@@ -63,8 +63,6 @@ public class MainFrame extends javax.swing.JFrame {
 
         pnlLeft.setBackground(new java.awt.Color(102, 255, 153));
         pnlLeft.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lblCart.setIcon(new javax.swing.ImageIcon("E:\\Thogakade-System\\Thogakade-System\\Assets\\Shopping-Cart-Icon.png")); // NOI18N
         pnlLeft.add(lblCart, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 260, -1, -1));
 
         lblTitle.setBackground(new java.awt.Color(255, 255, 255));
@@ -155,7 +153,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
         pnlRight.add(btnSubmit, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 660, 110, 40));
 
-        pnlMain.add(pnlRight, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 0, 650, 750));
+        pnlMain.add(pnlRight, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, -100, 650, 750));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

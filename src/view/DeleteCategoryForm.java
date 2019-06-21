@@ -128,7 +128,7 @@ public class DeleteCategoryForm extends javax.swing.JFrame {
                 btnSubmitActionPerformed(evt);
             }
         });
-        pnlBase.add(btnSubmit, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 380, 120, 50));
+        pnlBase.add(btnSubmit, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 380, 140, 50));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -167,7 +167,7 @@ public class DeleteCategoryForm extends javax.swing.JFrame {
             if(isDeleted)
             this.setVisible(false);
             else{
-                JOptionPane.showMessageDialog(this,"Deieted Failed", "Something went wrong", JOptionPane.ERROR);
+                JOptionPane.showMessageDialog(this,"Deleted Failed", "Something went wrong", JOptionPane.ERROR);
                 
             }
 

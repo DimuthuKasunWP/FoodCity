@@ -23,13 +23,13 @@ import model.Supplier;
 public class BatchDao {
     private Connection connection;
     private SupplierDao dao;
-
+  
     public BatchDao() {
         connection=DBConnection.getInstance().getConnection();
 
     }
     
-    public boolean addBatch(String supplier,Batch batch) throws SQLException{
+    public boolean addBatch(int supplier,Batch batch) throws SQLException{
         Supplier object = dao.getSupplier(supplier);
         String sql="insert into batch(s_id,date)values('"+object.getS_id()+"','"+batch.getTime()+"')";
         Statement stm=connection.createStatement();
@@ -91,6 +91,7 @@ public class BatchDao {
         String sql="select * from batch ";
         PreparedStatement stm=connection.prepareStatement(sql);
         ResultSet rst = stm.executeQuery();
+        System.out.println("kio");
         while(rst.next()){
             Batch batch=new Batch();
             batch.setB_id(rst.getInt("b_id"));

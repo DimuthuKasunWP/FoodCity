@@ -7,7 +7,7 @@ package view;
 
 /**
  *
- * @author kasun
+ * @author Benura
  */
 public class DashBoard extends javax.swing.JFrame {
 
@@ -16,6 +16,7 @@ public class DashBoard extends javax.swing.JFrame {
      */
     public DashBoard() {
         initComponents();
+        this.setSize(2000,1500);
     }
 
     /**
@@ -27,21 +28,494 @@ public class DashBoard extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jPanel1 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLabel6 = new javax.swing.JLabel();
+        jSpinner3 = new javax.swing.JSpinner();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jLabel10 = new javax.swing.JLabel();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        txtName1 = new javax.swing.JTextField();
+        sepFour3 = new javax.swing.JSeparator();
+        txtName2 = new javax.swing.JTextField();
+        sepFour4 = new javax.swing.JSeparator();
+        txtName3 = new javax.swing.JTextField();
+        sepFour5 = new javax.swing.JSeparator();
+        txtName4 = new javax.swing.JTextField();
+        sepFour6 = new javax.swing.JSeparator();
+        txtName5 = new javax.swing.JTextField();
+        sepFour7 = new javax.swing.JSeparator();
+        txtName6 = new javax.swing.JTextField();
+        sepFour8 = new javax.swing.JSeparator();
+        txtName7 = new javax.swing.JTextField();
+        sepFour9 = new javax.swing.JSeparator();
+        txtName8 = new javax.swing.JTextField();
+        sepFour10 = new javax.swing.JSeparator();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem9 = new javax.swing.JMenuItem();
+        jMenuItem10 = new javax.swing.JMenuItem();
+        jMenuItem11 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuItem12 = new javax.swing.JMenuItem();
+        jMenuItem13 = new javax.swing.JMenuItem();
+        jMenuItem14 = new javax.swing.JMenuItem();
+        jMenu5 = new javax.swing.JMenu();
+        jMenuItem15 = new javax.swing.JMenuItem();
+        jMenuItem16 = new javax.swing.JMenuItem();
+        jMenuItem17 = new javax.swing.JMenuItem();
+        jMenuItem18 = new javax.swing.JMenuItem();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("DashBoard");
+        setPreferredSize(new java.awt.Dimension(2147483647, 2147483647));
+
+        jPanel1.setBackground(new java.awt.Color(153, 0, 153));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButton1.setBackground(new java.awt.Color(0, 255, 255));
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jButton1.setText("Choose Item");
+        jButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 190, 40));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Item Code");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 130, 40));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Name");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 80, 110, 40));
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Thoga Price");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 80, 150, 40));
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Sillara Price");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 80, 150, 40));
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Selection");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 130, 40));
+
+        jRadioButton1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jRadioButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jRadioButton1.setText("Thoga");
+        jPanel1.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 170, 120, 40));
+
+        jRadioButton2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jRadioButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jRadioButton2.setText("Sillara");
+        jPanel1.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 170, 130, 40));
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 210, -1, -1));
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Quantity");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 110, 40));
+
+        jSpinner3.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jSpinner3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.add(jSpinner3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, 60, 40));
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Normal Price");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 260, 160, 40));
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("Our Price");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 260, 120, 40));
+
+        jTable1.setBackground(new java.awt.Color(255, 255, 51));
+        jTable1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Description", "Quantity", "Price", "Total"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 910, 320));
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("Date ");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 360, 100, 35));
+        jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 360, 160, 35));
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("Profit");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 430, 100, 35));
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setText("Grand Price");
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 510, 140, 35));
+
+        jButton2.setBackground(new java.awt.Color(0, 0, 255));
+        jButton2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jButton2.setText("Proceed");
+        jButton2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 610, 120, 40));
+
+        txtName1.setBackground(new java.awt.Color(153, 0, 153));
+        txtName1.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        txtName1.setForeground(new java.awt.Color(255, 255, 255));
+        txtName1.setText("Enter Price");
+        txtName1.setToolTipText("");
+        txtName1.setBorder(null);
+        txtName1.setDisabledTextColor(new java.awt.Color(204, 204, 204));
+        txtName1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtName1FocusGained(evt);
+            }
+        });
+        txtName1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtName1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtName1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1210, 80, 120, 30));
+        jPanel1.add(sepFour3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1210, 110, 120, 10));
+
+        txtName2.setBackground(new java.awt.Color(153, 0, 153));
+        txtName2.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        txtName2.setForeground(new java.awt.Color(255, 255, 255));
+        txtName2.setText("Enter Code");
+        txtName2.setToolTipText("");
+        txtName2.setBorder(null);
+        txtName2.setDisabledTextColor(new java.awt.Color(204, 204, 204));
+        txtName2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtName2FocusGained(evt);
+            }
+        });
+        txtName2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtName2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtName2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 120, 30));
+        jPanel1.add(sepFour4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 110, 120, 10));
+
+        txtName3.setBackground(new java.awt.Color(153, 0, 153));
+        txtName3.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        txtName3.setForeground(new java.awt.Color(255, 255, 255));
+        txtName3.setText("Enter Name");
+        txtName3.setToolTipText("");
+        txtName3.setBorder(null);
+        txtName3.setDisabledTextColor(new java.awt.Color(204, 204, 204));
+        txtName3.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtName3FocusGained(evt);
+            }
+        });
+        txtName3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtName3ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtName3, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 80, 120, 30));
+        jPanel1.add(sepFour5, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 110, 120, 10));
+
+        txtName4.setBackground(new java.awt.Color(153, 0, 153));
+        txtName4.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        txtName4.setForeground(new java.awt.Color(255, 255, 255));
+        txtName4.setText("Enter Price");
+        txtName4.setToolTipText("");
+        txtName4.setBorder(null);
+        txtName4.setDisabledTextColor(new java.awt.Color(204, 204, 204));
+        txtName4.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtName4FocusGained(evt);
+            }
+        });
+        txtName4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtName4ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtName4, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 260, 120, 30));
+        jPanel1.add(sepFour6, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 290, 120, 10));
+
+        txtName5.setBackground(new java.awt.Color(153, 0, 153));
+        txtName5.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        txtName5.setForeground(new java.awt.Color(255, 255, 255));
+        txtName5.setText("Enter Profit");
+        txtName5.setToolTipText("");
+        txtName5.setBorder(null);
+        txtName5.setDisabledTextColor(new java.awt.Color(204, 204, 204));
+        txtName5.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtName5FocusGained(evt);
+            }
+        });
+        txtName5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtName5ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtName5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 430, 150, 30));
+        jPanel1.add(sepFour7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 460, 160, 10));
+
+        txtName6.setBackground(new java.awt.Color(153, 0, 153));
+        txtName6.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        txtName6.setForeground(new java.awt.Color(255, 255, 255));
+        txtName6.setText("Enter Price");
+        txtName6.setToolTipText("");
+        txtName6.setBorder(null);
+        txtName6.setDisabledTextColor(new java.awt.Color(204, 204, 204));
+        txtName6.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtName6FocusGained(evt);
+            }
+        });
+        txtName6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtName6ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtName6, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 80, 120, 30));
+        jPanel1.add(sepFour8, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 110, 120, 10));
+
+        txtName7.setBackground(new java.awt.Color(153, 0, 153));
+        txtName7.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        txtName7.setForeground(new java.awt.Color(255, 255, 255));
+        txtName7.setText("Enter Grand Price");
+        txtName7.setToolTipText("");
+        txtName7.setBorder(null);
+        txtName7.setDisabledTextColor(new java.awt.Color(204, 204, 204));
+        txtName7.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtName7FocusGained(evt);
+            }
+        });
+        txtName7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtName7ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtName7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 510, -1, 30));
+        jPanel1.add(sepFour9, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 540, 170, 10));
+
+        txtName8.setBackground(new java.awt.Color(153, 0, 153));
+        txtName8.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        txtName8.setForeground(new java.awt.Color(255, 255, 255));
+        txtName8.setText("Enter Price");
+        txtName8.setToolTipText("");
+        txtName8.setBorder(null);
+        txtName8.setDisabledTextColor(new java.awt.Color(204, 204, 204));
+        txtName8.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtName8FocusGained(evt);
+            }
+        });
+        txtName8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtName8ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtName8, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 260, 120, 30));
+        jPanel1.add(sepFour10, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 290, 120, 10));
+
+        jMenu1.setText("Supplier");
+
+        jMenuItem1.setText("Create Supplier");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        jMenuItem2.setText("Update ");
+        jMenu1.add(jMenuItem2);
+
+        jMenuItem3.setText("View ");
+        jMenu1.add(jMenuItem3);
+
+        jMenuItem4.setText("Delete");
+        jMenu1.add(jMenuItem4);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Categories");
+
+        jMenuItem5.setText("Add ");
+        jMenu2.add(jMenuItem5);
+
+        jMenuItem6.setText("Update");
+        jMenu2.add(jMenuItem6);
+
+        jMenuItem7.setText("Delete");
+        jMenu2.add(jMenuItem7);
+
+        jMenuItem8.setText("View");
+        jMenu2.add(jMenuItem8);
+
+        jMenuBar1.add(jMenu2);
+
+        jMenu3.setText("Reports");
+
+        jMenuItem9.setText("Daily Income");
+        jMenu3.add(jMenuItem9);
+
+        jMenuItem10.setText("Income Per Order");
+        jMenu3.add(jMenuItem10);
+
+        jMenuItem11.setText("Weekly Income");
+        jMenu3.add(jMenuItem11);
+
+        jMenuBar1.add(jMenu3);
+
+        jMenu4.setText("Orders");
+
+        jMenuItem12.setText("Today Orders");
+        jMenu4.add(jMenuItem12);
+
+        jMenuItem13.setText("Weekly Orders");
+        jMenu4.add(jMenuItem13);
+
+        jMenuItem14.setText("Monthly Orders");
+        jMenu4.add(jMenuItem14);
+
+        jMenuBar1.add(jMenu4);
+
+        jMenu5.setText("Items");
+
+        jMenuItem15.setText("Add Item");
+        jMenu5.add(jMenuItem15);
+
+        jMenuItem16.setText("Update");
+        jMenu5.add(jMenuItem16);
+
+        jMenuItem17.setText("View");
+        jMenu5.add(jMenuItem17);
+
+        jMenuItem18.setText("Delete");
+        jMenu5.add(jMenuItem18);
+
+        jMenuBar1.add(jMenu5);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1218, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1675, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 692, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 778, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void txtName1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtName1FocusGained
+        txtName1.setText(null);
+    }//GEN-LAST:event_txtName1FocusGained
+
+    private void txtName1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtName1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtName1ActionPerformed
+
+    private void txtName2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtName2FocusGained
+         txtName2.setText(null);
+    }//GEN-LAST:event_txtName2FocusGained
+
+    private void txtName2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtName2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtName2ActionPerformed
+
+    private void txtName3FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtName3FocusGained
+        txtName3.setText(null);
+    }//GEN-LAST:event_txtName3FocusGained
+
+    private void txtName3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtName3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtName3ActionPerformed
+
+    private void txtName4FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtName4FocusGained
+         txtName4.setText(null);
+    }//GEN-LAST:event_txtName4FocusGained
+
+    private void txtName4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtName4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtName4ActionPerformed
+
+    private void txtName5FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtName5FocusGained
+        txtName5.setText(null);
+    }//GEN-LAST:event_txtName5FocusGained
+
+    private void txtName5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtName5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtName5ActionPerformed
+
+    private void txtName6FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtName6FocusGained
+        txtName6.setText(null);
+    }//GEN-LAST:event_txtName6FocusGained
+
+    private void txtName6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtName6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtName6ActionPerformed
+
+    private void txtName7FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtName7FocusGained
+         txtName7.setText(null);
+    }//GEN-LAST:event_txtName7FocusGained
+
+    private void txtName7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtName7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtName7ActionPerformed
+
+    private void txtName8FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtName8FocusGained
+        txtName8.setText(null);
+    }//GEN-LAST:event_txtName8FocusGained
+
+    private void txtName8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtName8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtName8ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +553,66 @@ public class DashBoard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem10;
+    private javax.swing.JMenuItem jMenuItem11;
+    private javax.swing.JMenuItem jMenuItem12;
+    private javax.swing.JMenuItem jMenuItem13;
+    private javax.swing.JMenuItem jMenuItem14;
+    private javax.swing.JMenuItem jMenuItem15;
+    private javax.swing.JMenuItem jMenuItem16;
+    private javax.swing.JMenuItem jMenuItem17;
+    private javax.swing.JMenuItem jMenuItem18;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSpinner jSpinner3;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JSeparator sepFour10;
+    private javax.swing.JSeparator sepFour3;
+    private javax.swing.JSeparator sepFour4;
+    private javax.swing.JSeparator sepFour5;
+    private javax.swing.JSeparator sepFour6;
+    private javax.swing.JSeparator sepFour7;
+    private javax.swing.JSeparator sepFour8;
+    private javax.swing.JSeparator sepFour9;
+    private javax.swing.JTextField txtName1;
+    private javax.swing.JTextField txtName2;
+    private javax.swing.JTextField txtName3;
+    private javax.swing.JTextField txtName4;
+    private javax.swing.JTextField txtName5;
+    private javax.swing.JTextField txtName6;
+    private javax.swing.JTextField txtName7;
+    private javax.swing.JTextField txtName8;
     // End of variables declaration//GEN-END:variables
 }

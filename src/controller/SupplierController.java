@@ -31,9 +31,9 @@ public class SupplierController {
         return dao.update(supplier);
     }
     
-    public Supplier getSupplier(String name) throws SQLException{
+    public Supplier getSupplier(int id) throws SQLException{
         
-        return dao.getSupplier(name);
+        return dao.getSupplier(id);
     }
     
     public List<Supplier> getAll() throws SQLException{
