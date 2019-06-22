@@ -17,13 +17,13 @@ public class Item {
     private double taking_price;
     private double thoga_price;
     private double our_price;
-    private String warning;
+    private int warning;
     private double quantity;
 
     public Item() {
     }
 
-    public Item(int i_id, int b_id, int c_id,String description,double taking_price,double thoga_price,double our_price,String warning,double quantity) {
+    public Item(int i_id, int b_id, int c_id,String description,double taking_price,double thoga_price,double our_price,int warning,double quantity) {
         this.i_id = i_id;
         this.b_id = b_id;
         this.c_id = c_id;
@@ -34,7 +34,6 @@ public class Item {
         this.warning=warning;
         this.quantity=quantity;
     }
-
 
     public int getI_id() {
         return i_id;
@@ -92,11 +91,11 @@ public class Item {
         return taking_price;
     }
     
-    public void setWarning(String warning){
+    public void setWarning(int warning){
         this.warning=warning;
     }
     
-    public String getWarning(){
+    public int getWarning(){
         return warning;
     }
     

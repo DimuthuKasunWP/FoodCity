@@ -14,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import model.Category;
 import model.Supplier;
@@ -65,7 +66,8 @@ public class ViewCategoryForm extends javax.swing.JFrame {
         lblDelete = new javax.swing.JLabel();
         lblUpdate = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Category Details");
 
         pnlBase.setBackground(new java.awt.Color(153, 0, 153));
 
@@ -224,10 +226,7 @@ public class ViewCategoryForm extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
+                UIManager.setLookAndFeel("com.jtattoo.plaf.acryl.AcrylLookAndFeel");    
             }
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(ViewCategoryForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
