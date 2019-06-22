@@ -23,12 +23,22 @@ import model.Item;
 public class ChooseItemForm extends javax.swing.JFrame {
     private CategoryController controller;
     private ItemController itemController;
+    DashBoard board=null;
     /**
      * Creates new form ChooseItemForm
      */
     public ChooseItemForm() {
         controller=new CategoryController();
         itemController=new ItemController();
+        initComponents();
+        this.setSize(1189,744);
+        this.setLocationRelativeTo(null);
+        loadCombo();
+    }
+    public ChooseItemForm(DashBoard dash){
+        controller=new CategoryController();
+        itemController=new ItemController();
+        board=dash;
         initComponents();
         this.setSize(1189,744);
         this.setLocationRelativeTo(null);
@@ -44,7 +54,7 @@ public class ChooseItemForm extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(ChooseItemForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-        cmbCategory.setSelectedIndex(0);
+//        cmbCategory.setSelectedIndex(0);
         loadTable();
         
     }
@@ -108,16 +118,23 @@ public class ChooseItemForm extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         jScrollPane1.setViewportView(view_details);
 
         pnlBase.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, 870, 490));
 
-        btnSelect.setBackground(new java.awt.Color(0, 0, 102));
+        btnSelect.setBackground(new java.awt.Color(51, 0, 255));
         btnSelect.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         btnSelect.setForeground(new java.awt.Color(255, 255, 255));
         btnSelect.setText("Select");
@@ -136,7 +153,7 @@ public class ChooseItemForm extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlBase, javax.swing.GroupLayout.DEFAULT_SIZE, 744, Short.MAX_VALUE)
+            .addComponent(pnlBase, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 744, Short.MAX_VALUE)
         );
 
         pack();
@@ -144,11 +161,11 @@ public class ChooseItemForm extends javax.swing.JFrame {
 
     private void btnSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelectActionPerformed
         DefaultTableModel dtm= (DefaultTableModel) view_details.getModel();
-        if(view_details.getSelectedRowCount()>0){
+        if(view_details.getSelectedRowCount()>1){
             JOptionPane.showMessageDialog(this, "select only one row at time", "Warning", JOptionPane.WARNING_MESSAGE);
       }
         else if(view_details.getSelectedRowCount()==0)
-            JOptionPane.showMessageDialog(this, "select one row at time", "Warning", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Please select a row", "Warning", JOptionPane.WARNING_MESSAGE);
         else{
             int  id = (int) dtm.getValueAt(view_details.getSelectedRow(), 0);
             int category_id= (int) dtm.getValueAt(view_details.getSelectedRow(), 1);
@@ -158,7 +175,8 @@ public class ChooseItemForm extends javax.swing.JFrame {
              double our_price= (double) dtm.getValueAt(view_details.getSelectedRow(), 5);
              double qty=(double) dtm.getValueAt(view_details.getSelectedRow(), 6);
            Item item=new Item(id, 0, category_id, desctiption, taking_price, thoga_price, our_price, 0, qty);
-           DashBoard board=new DashBoard(item);
+//           DashBoard board=new DashBoard();
+            board.loadData(item);
            this.dispose();
         }
     }//GEN-LAST:event_btnSelectActionPerformed

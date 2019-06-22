@@ -52,8 +52,7 @@ public class AddSupplierForm extends javax.swing.JFrame {
         sepFour2 = new javax.swing.JSeparator();
         btnSubmit = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Add New Supplier");
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         pnlBase.setBackground(new java.awt.Color(153, 0, 153));
         pnlBase.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -154,7 +153,7 @@ public class AddSupplierForm extends javax.swing.JFrame {
         pnlBase.add(txtMobile1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 210, 320, 30));
         pnlBase.add(sepFour2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 240, 320, 10));
 
-        btnSubmit.setBackground(new java.awt.Color(0, 0, 102));
+        btnSubmit.setBackground(new java.awt.Color(51, 0, 255));
         btnSubmit.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         btnSubmit.setForeground(new java.awt.Color(255, 255, 255));
         btnSubmit.setText("Submit");
@@ -169,7 +168,7 @@ public class AddSupplierForm extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlBase, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 912, Short.MAX_VALUE)
+            .addComponent(pnlBase, javax.swing.GroupLayout.DEFAULT_SIZE, 912, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

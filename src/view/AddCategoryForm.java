@@ -43,8 +43,7 @@ public class AddCategoryForm extends javax.swing.JFrame {
         lblName = new javax.swing.JLabel();
         btnSubmit = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Add New Category");
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         pnlBase.setBackground(new java.awt.Color(153, 0, 153));
         pnlBase.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -83,7 +82,7 @@ public class AddCategoryForm extends javax.swing.JFrame {
         lblName.setText("Name");
         pnlBase.add(lblName, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 230, 80));
 
-        btnSubmit.setBackground(new java.awt.Color(0, 0, 102));
+        btnSubmit.setBackground(new java.awt.Color(51, 0, 255));
         btnSubmit.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         btnSubmit.setForeground(new java.awt.Color(255, 255, 255));
         btnSubmit.setText("Submit");
