@@ -68,7 +68,8 @@ public class ViewSupplierForm extends javax.swing.JFrame {
         lblDelete = new javax.swing.JLabel();
         lblUpdate = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Supplier Details");
 
         pnlMain.setBackground(new java.awt.Color(153, 0, 153));
         pnlMain.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -93,14 +94,14 @@ public class ViewSupplierForm extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblSuppliers);
 
-        pnlMain.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, 889, -1));
+        pnlMain.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, 889, -1));
 
         lblTitle.setBackground(new java.awt.Color(255, 255, 255));
         lblTitle.setFont(new java.awt.Font("Century Gothic", 0, 36)); // NOI18N
         lblTitle.setForeground(new java.awt.Color(255, 255, 255));
         lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitle.setText("Supplier Details");
-        pnlMain.add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, 410, 110));
+        pnlMain.add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 10, 410, 110));
 
         lblDelete.setBackground(new java.awt.Color(51, 0, 255));
         lblDelete.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
@@ -114,7 +115,7 @@ public class ViewSupplierForm extends javax.swing.JFrame {
                 lblDeleteMouseClicked(evt);
             }
         });
-        pnlMain.add(lblDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 510, 70, 30));
+        pnlMain.add(lblDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 390, 70, 30));
 
         lblUpdate.setBackground(new java.awt.Color(51, 0, 255));
         lblUpdate.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
@@ -128,7 +129,7 @@ public class ViewSupplierForm extends javax.swing.JFrame {
                 lblUpdateMouseClicked(evt);
             }
         });
-        pnlMain.add(lblUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 590, 70, 30));
+        pnlMain.add(lblUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 500, 70, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -172,10 +173,9 @@ public class ViewSupplierForm extends javax.swing.JFrame {
     }//GEN-LAST:event_lblDeleteMouseClicked
 
     private void lblUpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblUpdateMouseClicked
-DefaultTableModel dtm=(DefaultTableModel) tblSuppliers.getModel();
+    DefaultTableModel dtm=(DefaultTableModel) tblSuppliers.getModel();
         if(tblSuppliers.getSelectedRowCount()>0){
-            JOptionPane.showMessageDialog(this, "select only one row at time", "Warning", JOptionPane.WARNING_MESSAGE);
-        }
+      }
         else if(tblSuppliers.getSelectedRowCount()==0)
             JOptionPane.showMessageDialog(this, "select one row at time", "Warning", JOptionPane.WARNING_MESSAGE);
         else{
@@ -193,7 +193,8 @@ DefaultTableModel dtm=(DefaultTableModel) tblSuppliers.getModel();
             if(mob2.trim().length()!=0)
                 list.add(mob2);
             JFrame frame= new UpdateSupplierForm(sup);
-            frame.setVisible(true);
+            frame.setVisible(true);        JOptionPane.showMessageDialog(this, "select only one row at time", "Warning", JOptionPane.WARNING_MESSAGE);
+      
         }
             
     }//GEN-LAST:event_lblUpdateMouseClicked
