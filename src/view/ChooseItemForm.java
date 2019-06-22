@@ -23,12 +23,22 @@ import model.Item;
 public class ChooseItemForm extends javax.swing.JFrame {
     private CategoryController controller;
     private ItemController itemController;
+    DashBoard board=null;
     /**
      * Creates new form ChooseItemForm
      */
     public ChooseItemForm() {
         controller=new CategoryController();
         itemController=new ItemController();
+        initComponents();
+        this.setSize(1189,744);
+        this.setLocationRelativeTo(null);
+        loadCombo();
+    }
+    public ChooseItemForm(DashBoard dash){
+        controller=new CategoryController();
+        itemController=new ItemController();
+        board=dash;
         initComponents();
         this.setSize(1189,744);
         this.setLocationRelativeTo(null);
@@ -44,7 +54,7 @@ public class ChooseItemForm extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(ChooseItemForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-        cmbCategory.setSelectedIndex(0);
+//        cmbCategory.setSelectedIndex(0);
         loadTable();
         
     }
@@ -79,8 +89,7 @@ public class ChooseItemForm extends javax.swing.JFrame {
         view_details = new javax.swing.JTable();
         btnSelect = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Select Category");
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         pnlBase.setBackground(new java.awt.Color(153, 0, 153));
         pnlBase.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -117,7 +126,7 @@ public class ChooseItemForm extends javax.swing.JFrame {
 
         pnlBase.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, 870, 490));
 
-        btnSelect.setBackground(new java.awt.Color(0, 0, 102));
+        btnSelect.setBackground(new java.awt.Color(51, 0, 255));
         btnSelect.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         btnSelect.setForeground(new java.awt.Color(255, 255, 255));
         btnSelect.setText("Select");
@@ -158,7 +167,8 @@ public class ChooseItemForm extends javax.swing.JFrame {
              double our_price= (double) dtm.getValueAt(view_details.getSelectedRow(), 5);
              double qty=(double) dtm.getValueAt(view_details.getSelectedRow(), 6);
            Item item=new Item(id, 0, category_id, desctiption, taking_price, thoga_price, our_price, 0, qty);
-           DashBoard board=new DashBoard(item);
+//           DashBoard board=new DashBoard();
+            board.loadData(item);
            this.dispose();
         }
     }//GEN-LAST:event_btnSelectActionPerformed

@@ -66,8 +66,7 @@ public class ViewCategoryForm extends javax.swing.JFrame {
         lblDelete = new javax.swing.JLabel();
         lblUpdate = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Category Details");
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         pnlBase.setBackground(new java.awt.Color(153, 0, 153));
 

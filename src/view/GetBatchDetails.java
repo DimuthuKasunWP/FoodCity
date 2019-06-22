@@ -23,7 +23,7 @@ public DefaultTableModel default_table=null;
 private BatchController batchcontroller=new BatchController();
 private SupplierController suppliercontroller=new SupplierController();
 private Supplier supplier=new Supplier();
-
+public AddItemForm addItem;
     /**
      * Creates new form getBatchDetails
      */
@@ -39,6 +39,22 @@ private Supplier supplier=new Supplier();
                Logger.getLogger(GetBatchDetails.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public GetBatchDetails(AddItemForm addItem){
+        this.addItem=addItem;
+        initComponents();
+        this.setLocationRelativeTo(null);
+        
+        try{
+            getBatchDetail();
+        }
+        catch(Exception ex){
+              // JOptionPane.showMessageDialog(null,"Error Loading");
+               Logger.getLogger(GetBatchDetails.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
     
     public void getBatchDetail() throws SQLException{
         default_table=(DefaultTableModel)batchDetails.getModel();
@@ -72,8 +88,7 @@ private Supplier supplier=new Supplier();
         batchDetails = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Batch Details");
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(153, 0, 153));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -127,8 +142,12 @@ private Supplier supplier=new Supplier();
         int column=0;
         String data=batchDetails.getModel().getValueAt(row, column).toString();
         int batch_id=Integer.parseInt(data);
-        this.dispose();
-        new AddItemForm(batch_id).setVisible(true);
+        if(batchDetails.getSelectedRowCount()==0)
+            JOptionPane.showMessageDialog(this,"Please select an item","Warning",JOptionPane.WARNING_MESSAGE);
+        else{
+            addItem.loadId(batch_id);
+            this.dispose();
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

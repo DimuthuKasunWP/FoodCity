@@ -66,8 +66,7 @@ public class UpdateSupplierForm extends javax.swing.JFrame {
         txtName = new javax.swing.JTextField();
         sepFour3 = new javax.swing.JSeparator();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Update Supplier");
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         pnlBase.setBackground(new java.awt.Color(153, 0, 153));
         pnlBase.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -141,7 +140,7 @@ public class UpdateSupplierForm extends javax.swing.JFrame {
         });
         pnlBase.add(txtMobile2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 350, 320, 30));
 
-        btnSubmit.setBackground(new java.awt.Color(0, 0, 102));
+        btnSubmit.setBackground(new java.awt.Color(51, 0, 255));
         btnSubmit.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         btnSubmit.setForeground(new java.awt.Color(255, 255, 255));
         btnSubmit.setText("UPDATE");

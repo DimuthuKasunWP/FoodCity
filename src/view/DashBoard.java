@@ -44,16 +44,17 @@ public class DashBoard extends javax.swing.JFrame {
         txtQty.setText(""+1);
         txtProfit.setText(""+0.0);
         txtGrandPrice.setText(""+0.0);
+         loadData();
     }
     public DashBoard(Item item){
-         initComponents();
+        initComponents();
         this.setSize(1441,768);
         this.setLocationRelativeTo(null);
         loadData(item);
-         txtProfit.setText(""+0.0);
+        txtProfit.setText(""+0.0);
         txtGrandPrice.setText(""+0.0);
     }
-    private void loadData(Item item){
+    public void loadData(Item item){
          txtProfit.setText(""+0.0);
         txtGrandPrice.setText(""+0.0);
         txtItemId.requestFocus();
@@ -62,7 +63,7 @@ public class DashBoard extends javax.swing.JFrame {
         txtDescription.setText(item.getDescription());
         txtName6.setText(Double.toString(item.getThoga_price()));
         txtName1.setText(Double.toString(item.getTaking_price()));
-        txtPrice.setText(Double.toString(item.getThoga_price()));
+        txtPrice.setText(Double.toString(item.getOur_price()));
         buttonGroup1.add(jRadioButton1);
         buttonGroup1.add(jRadioButton2);
         txtQty.setText(""+1);
@@ -132,6 +133,7 @@ public class DashBoard extends javax.swing.JFrame {
         btnAdd = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -459,6 +461,17 @@ public class DashBoard extends javax.swing.JFrame {
         });
         jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 320, 270, 40));
 
+        btnDelete.setBackground(new java.awt.Color(51, 0, 255));
+        btnDelete.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        btnDelete.setForeground(new java.awt.Color(255, 255, 255));
+        btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 610, 130, 40));
+
         jMenuBar1.setBackground(new java.awt.Color(153, 0, 153));
 
         jMenu1.setBackground(new java.awt.Color(153, 0, 153));
@@ -613,7 +626,7 @@ public class DashBoard extends javax.swing.JFrame {
     }//GEN-LAST:event_txtQtyActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ChooseItemForm form=new ChooseItemForm();
+        ChooseItemForm form=new ChooseItemForm(this);
         form.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -746,6 +759,19 @@ public class DashBoard extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem15ActionPerformed
 
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        int selectedCount = jTable1.getSelectedRowCount();
+        if(selectedCount<=0){
+            JOptionPane.showMessageDialog(this, "Select a row","Warning",JOptionPane.WARNING_MESSAGE);
+        }else{
+            DefaultTableModel dtm= (DefaultTableModel) jTable1.getModel();
+            int[] selectedRows = jTable1.getSelectedRows();
+            for(int count=0;count<selectedCount;count++){
+                dtm.removeRow(selectedRows[count]);
+            }
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -780,6 +806,7 @@ public class DashBoard extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnDelete;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cmbRatio;
     private javax.swing.JButton jButton1;
