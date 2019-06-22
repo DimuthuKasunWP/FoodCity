@@ -27,7 +27,7 @@ public class AddItemForm extends javax.swing.JFrame {
     public AddItemForm() {
         initComponents();
         
-        this.setLocationRelativeTo(null);
+       // this.setLocationRelativeTo(null);
         this.setSize(1366,696);
     }
     
@@ -430,8 +430,8 @@ public class AddItemForm extends javax.swing.JFrame {
     }//GEN-LAST:event_itemIdActionPerformed
 
     private void select_batchIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_select_batchIdActionPerformed
-       this.dispose();
-       new GetBatchDetails().setVisible(true);
+      // this.dispose();
+       new GetBatchDetails(this).setVisible(true);
     }//GEN-LAST:event_select_batchIdActionPerformed
 
     private void ourPriceFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ourPriceFocusGained

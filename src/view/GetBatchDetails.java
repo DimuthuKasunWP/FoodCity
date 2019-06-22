@@ -58,6 +58,7 @@ public AddItemForm addItem;
     
     public void getBatchDetail() throws SQLException{
         default_table=(DefaultTableModel)batchDetails.getModel();
+
         List<Batch> list=new ArrayList<>();
         list=batchcontroller.getAll();
         if(!list.isEmpty()){
@@ -88,7 +89,8 @@ public AddItemForm addItem;
         batchDetails = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Batch Details");
 
         jPanel1.setBackground(new java.awt.Color(153, 0, 153));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -99,7 +101,7 @@ public AddItemForm addItem;
         jLabel1.setText("Batch Details");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, 450, 80));
 
-        batchDetails.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        batchDetails.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         batchDetails.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -108,9 +110,10 @@ public AddItemForm addItem;
                 "Batch ID", "Supplier ID", "Supplier Name", "Date", "Contact"
             }
         ));
+        batchDetails.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_LAST_COLUMN);
         jScrollPane1.setViewportView(batchDetails);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 700, 450));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 830, 450));
 
         jButton1.setBackground(new java.awt.Color(51, 0, 255));
         jButton1.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
@@ -121,33 +124,34 @@ public AddItemForm addItem;
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 230, 100, 40));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 230, 100, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 865, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1008, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 574, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 574, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        if(batchDetails.getSelectedRowCount()>0){
         int row=batchDetails.getSelectedRow();
         int column=0;
         String data=batchDetails.getModel().getValueAt(row, column).toString();
         int batch_id=Integer.parseInt(data);
-        if(batchDetails.getSelectedRowCount()==0)
-            JOptionPane.showMessageDialog(this,"Please select an item","Warning",JOptionPane.WARNING_MESSAGE);
-        else{
-            addItem.loadId(batch_id);
-            this.dispose();
+        addItem.loadId(batch_id);
+        this.dispose();
         }
+        else if(batchDetails.getSelectedRowCount()==0)
+            JOptionPane.showMessageDialog(this,"Please select an item","Warning",JOptionPane.WARNING_MESSAGE);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

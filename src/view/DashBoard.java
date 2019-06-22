@@ -30,6 +30,7 @@ public class DashBoard extends javax.swing.JFrame {
     List<OrderDetail> temp=new ArrayList<>();
     private ItemController controller=new ItemController();
     private OrderController orderController=new OrderController();
+    private boolean isLoaded=false;
     /**
      * Creates new form DashBoard
      */
@@ -55,7 +56,8 @@ public class DashBoard extends javax.swing.JFrame {
         txtGrandPrice.setText(""+0.0);
     }
     public void loadData(Item item){
-         txtProfit.setText(""+0.0);
+        isLoaded=true;
+        txtProfit.setText(""+0.0);
         txtGrandPrice.setText(""+0.0);
         txtItemId.requestFocus();
         jRadioButton2.setSelected(true);
@@ -313,7 +315,7 @@ public class DashBoard extends javax.swing.JFrame {
                 txtDescriptionActionPerformed(evt);
             }
         });
-        jPanel1.add(txtDescription, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 80, 170, 30));
+        jPanel1.add(txtDescription, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 80, 170, 30));
         jPanel1.add(sepFour5, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 110, 150, 10));
 
         txtProfit.setBackground(new java.awt.Color(153, 0, 153));
@@ -569,7 +571,8 @@ public class DashBoard extends javax.swing.JFrame {
     }//GEN-LAST:event_txtName1ActionPerformed
 
     private void txtItemIdFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtItemIdFocusGained
-         txtItemId.setText(null);
+        if(!isLoaded)
+        txtItemId.setText(null);
     }//GEN-LAST:event_txtItemIdFocusGained
 
     private void txtItemIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtItemIdActionPerformed
