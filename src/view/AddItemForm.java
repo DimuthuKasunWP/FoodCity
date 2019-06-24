@@ -75,7 +75,8 @@ public class AddItemForm extends javax.swing.JFrame {
         enter_btn = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Add New");
 
         jPanel1.setBackground(new java.awt.Color(153, 0, 153));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());

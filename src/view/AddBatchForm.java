@@ -26,14 +26,14 @@ import model.Supplier;
  */
 public class AddBatchForm extends javax.swing.JFrame {
  private BatchController controller;
- private SupplierController supplierController;
+ private SupplierController supplierController=new SupplierController();
     /**
      * Creates new form AddBatchForm
      */
     public AddBatchForm() {
         controller=new BatchController();
         initComponents();
-        this.setSize(817,472);
+
         this.setLocationRelativeTo(null);
         loadTable();
         
@@ -46,6 +46,7 @@ public class AddBatchForm extends javax.swing.JFrame {
             Object [] row={supplier.getS_id(),supplier.getName(),supplier.getMobile().get(0),supplier.getMobile().get(1)};
             dtm.addRow(row);
             }
+            
         } catch (SQLException ex) {
             Logger.getLogger(ViewSupplierForm.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -69,7 +70,8 @@ public class AddBatchForm extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblSuppliers = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Add New");
 
         pnlBase.setBackground(new java.awt.Color(153, 0, 153));
         pnlBase.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -116,7 +118,7 @@ public class AddBatchForm extends javax.swing.JFrame {
                 btnSubmitActionPerformed(evt);
             }
         });
-        pnlBase.add(btnSubmit, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 680, 120, 50));
+        pnlBase.add(btnSubmit, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 580, 120, 50));
 
         tblSuppliers.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         tblSuppliers.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N

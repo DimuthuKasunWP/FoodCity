@@ -6,6 +6,7 @@
 package model;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  *
@@ -15,15 +16,7 @@ public class Orders {
     private int o_id;
     private Timestamp time;
     private double profit;
-
-    public double getProfit() {
-        return profit;
-    }
-
-    public void setProfit(double profit) {
-        this.profit = profit;
-    }
-    
+    private Date date;
 
     public Orders() {
     }
@@ -48,6 +41,25 @@ public class Orders {
     public void setTime(Timestamp time) {
         this.time = time;
     }
+    
+    public Date getDate(){
+        return date;
+    }
+    
+    public void setDate(Date date){
+        this.date=date;
+    }
+    
+    public double getProfit() {
+        return profit;
+    }
+
+    public void setProfit(double profit) {
+        this.profit = profit;
+    }
+    
+    
+    
 
     @Override
     public String toString() {

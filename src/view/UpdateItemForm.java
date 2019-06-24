@@ -94,7 +94,8 @@ private ItemController controller=null;
         warningLevel = new javax.swing.JTextField();
         enter_btn = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Update");
 
         pnlBase.setBackground(new java.awt.Color(153, 0, 153));
 

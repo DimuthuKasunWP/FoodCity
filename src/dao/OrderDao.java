@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package dao;
 
 import connection.DBConnection;
@@ -10,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,12 +35,12 @@ public class OrderDao {
             stm.setDouble(2, orders.getProfit());
             int res = stm.executeUpdate();
             if(res>0){
-                String temp="SELECT o_id AS LastID FROM orders WHERE ID = @@Identity";
+                String temp="SELECT o_id AS LastID FROM orders WHERE o_id = @@Identity";
                 stm = connection.prepareStatement(temp);
                 ResultSet rst = stm.executeQuery();
                 int id=0;
                 if(rst.next())
-                    id=rst.getInt("o_id");
+                    id=rst.getInt("LastID");
                 for (OrderDetail detail : details) {
                     String sql2="insert  into order_details values(?,?,?,?)";
                     stm=connection.prepareStatement(sql2);
@@ -88,5 +85,38 @@ public class OrderDao {
         }
             
     }
+    
+    public List<Orders> getAll() throws SQLException{
+        List<Orders> list=new ArrayList<>();
+        String sql="select * from orders";
+        PreparedStatement stm=connection.prepareStatement(sql);
+        ResultSet rst = stm.executeQuery();
+        while(rst.next()){
+            Orders orders=new Orders();
+            orders.setO_id(rst.getInt("o_id"));
+            orders.setTime(rst.getTimestamp("date"));
+            orders.setProfit(rst.getDouble("profit"));
+            list.add(orders);
+        }
+        
+        return list;
+        
+    }
+     
+     public List<Orders> getProfit() throws SQLException{
+        List<Orders> profit_list=new ArrayList<>();
+        String sql="select SUM(profit) as profits,DATE_FORMAT(date, '%Y-%m-%d') AS dates from orders group by DATE(date) desc";
+        PreparedStatement stm=connection.prepareStatement(sql);
+        ResultSet rst = stm.executeQuery();
+        while(rst.next()){
+            Orders order=new Orders();
+            order.setProfit(rst.getDouble("profits"));
+            order.setDate(rst.getDate("dates"));
+            profit_list.add(order);
+        }
+        
+        return profit_list;
+       
+     }
     
 }

@@ -24,7 +24,7 @@ import model.Supplier;
  * @author kasun
  */
 public class ViewCategoryForm extends javax.swing.JFrame {
-    private CategoryController controller=null;
+    private CategoryController controller=new CategoryController();
     /**
      * Creates new form ViewCategoryForm
      */
@@ -66,7 +66,8 @@ public class ViewCategoryForm extends javax.swing.JFrame {
         lblDelete = new javax.swing.JLabel();
         lblUpdate = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("View Category");
 
         pnlBase.setBackground(new java.awt.Color(153, 0, 153));
 

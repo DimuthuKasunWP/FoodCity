@@ -68,7 +68,8 @@ public class ViewSupplierForm extends javax.swing.JFrame {
         lblDelete = new javax.swing.JLabel();
         lblUpdate = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("View Supplier");
 
         pnlMain.setBackground(new java.awt.Color(153, 0, 153));
         pnlMain.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -114,7 +115,7 @@ public class ViewSupplierForm extends javax.swing.JFrame {
                 lblDeleteMouseClicked(evt);
             }
         });
-        pnlMain.add(lblDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 510, 70, 30));
+        pnlMain.add(lblDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 430, 80, 40));
 
         lblUpdate.setBackground(new java.awt.Color(51, 0, 255));
         lblUpdate.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
@@ -128,7 +129,7 @@ public class ViewSupplierForm extends javax.swing.JFrame {
                 lblUpdateMouseClicked(evt);
             }
         });
-        pnlMain.add(lblUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 590, 70, 30));
+        pnlMain.add(lblUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 490, 80, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

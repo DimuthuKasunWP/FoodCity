@@ -66,7 +66,8 @@ public class UpdateSupplierForm extends javax.swing.JFrame {
         txtName = new javax.swing.JTextField();
         sepFour3 = new javax.swing.JSeparator();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Update");
 
         pnlBase.setBackground(new java.awt.Color(153, 0, 153));
         pnlBase.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());

@@ -58,7 +58,8 @@ public class UpdateCategoryForm extends javax.swing.JFrame {
         txtId = new javax.swing.JTextField();
         sepFour3 = new javax.swing.JSeparator();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Update");
 
         pnlBase.setBackground(new java.awt.Color(153, 0, 153));
         pnlBase.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -130,7 +131,7 @@ public class UpdateCategoryForm extends javax.swing.JFrame {
                 txtIdActionPerformed(evt);
             }
         });
-        pnlBase.add(txtId, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 140, 400, 30));
+        pnlBase.add(txtId, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 140, 400, 30));
         pnlBase.add(sepFour3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 240, 320, 10));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

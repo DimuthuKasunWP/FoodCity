@@ -56,7 +56,8 @@ public class DeleteCategoryForm extends javax.swing.JFrame {
         lblName = new javax.swing.JLabel();
         btnSubmit = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Delete");
 
         pnlBase.setBackground(new java.awt.Color(153, 0, 153));
         pnlBase.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());

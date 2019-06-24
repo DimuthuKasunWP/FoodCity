@@ -58,6 +58,7 @@ public class MainFrame extends javax.swing.JFrame {
         btnSubmit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Log-In");
 
         pnlMain.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 

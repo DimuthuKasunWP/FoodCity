@@ -35,7 +35,7 @@ public class ItemDao {
     
     public Item getItem(int id) throws SQLException{
         Item item=new Item();
-        String sql="select * from item where id="+id+"";
+        String sql="select * from item where i_id="+id+"";
         PreparedStatement stm=connection.prepareStatement(sql);
         ResultSet rst = stm.executeQuery();
         while(rst.next()){
