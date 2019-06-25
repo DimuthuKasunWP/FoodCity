@@ -5,6 +5,8 @@ import controller.OrderController;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
@@ -16,8 +18,13 @@ public class IncomePerOrderForm extends javax.swing.JFrame {
     private DefaultTableModel default_table=null;
     private OrderController ordercontroller=new OrderController();
     public IncomePerOrderForm() {
-        initComponents();
-         this.setLocationRelativeTo(null);
+        try {
+            initComponents();
+            this.setLocationRelativeTo(null);
+            displayData();
+        } catch (SQLException ex) {
+            Logger.getLogger(IncomePerOrderForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public void displayData() throws SQLException{

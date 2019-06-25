@@ -18,6 +18,24 @@ public class Orders {
     private double profit;
     private Date date;
 
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+    
+
+    public double getProfit() {
+        return profit;
+    }
+
+    public void setProfit(double profit) {
+        this.profit = profit;
+    }
+    
+
     public Orders() {
     }
 
@@ -41,25 +59,6 @@ public class Orders {
     public void setTime(Timestamp time) {
         this.time = time;
     }
-    
-    public Date getDate(){
-        return date;
-    }
-    
-    public void setDate(Date date){
-        this.date=date;
-    }
-    
-    public double getProfit() {
-        return profit;
-    }
-
-    public void setProfit(double profit) {
-        this.profit = profit;
-    }
-    
-    
-    
 
     @Override
     public String toString() {

@@ -1,4 +1,8 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package dao;
 
 import connection.DBConnection;
@@ -42,13 +46,14 @@ public class OrderDao {
                 if(rst.next())
                     id=rst.getInt("LastID");
                 for (OrderDetail detail : details) {
-                    String sql2="insert  into order_details values(?,?,?,?)";
+                    String sql2="insert  into order_details(o_id,i_id,qty,selling_price) values(?,?,?,?)";
                     stm=connection.prepareStatement(sql2);
                     stm.setInt(1, id);
-                    stm.setInt(2, detail.getI_Id());
+                    stm.setLong(2, detail.getI_Id());
                     stm.setDouble(3, detail.getQty());
                     stm.setDouble(4,detail.getPrice());
                     int res2 = stm.executeUpdate();
+                    System.out.println("fhdkasljhf"+detail.getQty());
                     if(res2>0){
                         String sql3="update item set qty='"+detail.getQty()+"' where i_id='"+detail.getI_Id()+"' ";
                         stm=connection.prepareStatement(sql3);
@@ -78,7 +83,7 @@ public class OrderDao {
         }finally{
             try {
                 connection.setAutoCommit(true);
-                connection.close();
+//                connection.close();
             } catch (SQLException ex) {
                 Logger.getLogger(OrderDao.class.getName()).log(Level.SEVERE, null, ex);
             }

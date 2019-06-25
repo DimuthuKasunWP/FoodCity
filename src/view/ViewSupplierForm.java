@@ -30,7 +30,7 @@ public class ViewSupplierForm extends javax.swing.JFrame {
     public ViewSupplierForm() {
         controller=new SupplierController();
         initComponents();
-        this.setSize(1139,636);
+//        this.setSize(1139,636);
         this.setLocationRelativeTo(null);
        
         Font headerfont=new Font("Century Gothic",Font.BOLD,18);
@@ -39,9 +39,10 @@ public class ViewSupplierForm extends javax.swing.JFrame {
          loadTable();
     }
     
-    private void loadTable(){
+    public void loadTable(){
         try {
             DefaultTableModel dtm=(DefaultTableModel) tblSuppliers.getModel();
+            dtm.setRowCount(0);
             List<Supplier> all = controller.getAll();
             for (Supplier supplier : all) {
             Object [] row={supplier.getS_id(),supplier.getName(),supplier.getMobile().get(0),supplier.getMobile().get(1)};
@@ -65,11 +66,10 @@ public class ViewSupplierForm extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblSuppliers = new javax.swing.JTable();
         lblTitle = new javax.swing.JLabel();
-        lblDelete = new javax.swing.JLabel();
         lblUpdate = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("View Supplier");
+        setTitle("Supplier");
 
         pnlMain.setBackground(new java.awt.Color(153, 0, 153));
         pnlMain.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -103,20 +103,6 @@ public class ViewSupplierForm extends javax.swing.JFrame {
         lblTitle.setText("Supplier Details");
         pnlMain.add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, 410, 110));
 
-        lblDelete.setBackground(new java.awt.Color(51, 0, 255));
-        lblDelete.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        lblDelete.setForeground(new java.awt.Color(255, 255, 255));
-        lblDelete.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblDelete.setText("Delete");
-        lblDelete.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        lblDelete.setOpaque(true);
-        lblDelete.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblDeleteMouseClicked(evt);
-            }
-        });
-        pnlMain.add(lblDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 430, 80, 40));
-
         lblUpdate.setBackground(new java.awt.Color(51, 0, 255));
         lblUpdate.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         lblUpdate.setForeground(new java.awt.Color(255, 255, 255));
@@ -129,7 +115,7 @@ public class ViewSupplierForm extends javax.swing.JFrame {
                 lblUpdateMouseClicked(evt);
             }
         });
-        pnlMain.add(lblUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 490, 80, 40));
+        pnlMain.add(lblUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 590, 70, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -145,36 +131,9 @@ public class ViewSupplierForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void lblDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblDeleteMouseClicked
-        DefaultTableModel dtm=(DefaultTableModel) tblSuppliers.getModel();
-        if(tblSuppliers.getSelectedRowCount()>0){
-            JOptionPane.showMessageDialog(this, "select only one row at time", "Warning", JOptionPane.WARNING_MESSAGE);
-        }
-        else if(tblSuppliers.getSelectedRowCount()==0)
-            JOptionPane.showMessageDialog(this, "select one row at time", "Warning", JOptionPane.WARNING_MESSAGE);
-        else{
-            int  id = (int) dtm.getValueAt(tblSuppliers.getSelectedRow(), 0);
-            String name =  (String) dtm.getValueAt(tblSuppliers.getSelectedRow(), 1);
-            String mob1=(String) dtm.getValueAt(tblSuppliers.getSelectedRow(), 2);
-            String mob2="";
-            if(dtm.getValueAt(tblSuppliers.getSelectedRow(), 3)!=null)
-             mob2=(String) dtm.getValueAt(tblSuppliers.getSelectedRow(), 3);
-            Supplier sup=new Supplier();
-            sup.setS_id(id);
-            sup.setName(name);
-            ArrayList list=new ArrayList<>();
-            list.add(mob1);
-            if(mob2.trim().length()!=0)
-                list.add(mob2);
-            JFrame frame= new DeleteSupplierForm(sup);
-            frame.setVisible(true);
-        }
-            
-    }//GEN-LAST:event_lblDeleteMouseClicked
-
     private void lblUpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblUpdateMouseClicked
     DefaultTableModel dtm=(DefaultTableModel) tblSuppliers.getModel();
-        if(tblSuppliers.getSelectedRowCount()>0){
+        if(tblSuppliers.getSelectedRowCount()>1){
       }
         else if(tblSuppliers.getSelectedRowCount()==0)
             JOptionPane.showMessageDialog(this, "select one row at time", "Warning", JOptionPane.WARNING_MESSAGE);
@@ -192,8 +151,11 @@ public class ViewSupplierForm extends javax.swing.JFrame {
             list.add(mob1);
             if(mob2.trim().length()!=0)
                 list.add(mob2);
-            JFrame frame= new UpdateSupplierForm(sup);
-            frame.setVisible(true);        JOptionPane.showMessageDialog(this, "select only one row at time", "Warning", JOptionPane.WARNING_MESSAGE);
+            sup.setMobile(list);
+            JFrame frame= new UpdateSupplierForm(sup,this);
+            frame.setVisible(true);        
+            dtm.setRowCount(0);
+            loadTable();
       
         }
             
@@ -233,7 +195,6 @@ public class ViewSupplierForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblDelete;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel lblUpdate;
     private javax.swing.JPanel pnlMain;

@@ -24,13 +24,14 @@ import model.Supplier;
  * @author kasun
  */
 public class ViewCategoryForm extends javax.swing.JFrame {
-    private CategoryController controller=new CategoryController();
+    private CategoryController controller=null;
     /**
      * Creates new form ViewCategoryForm
      */
     public ViewCategoryForm() {
+        controller=new CategoryController();
         initComponents();
-        this.setSize(1139,636);
+        this.setSize(1139,658);
         this.setLocationRelativeTo(null);
        
         Font headerfont=new Font("Century Gothic",Font.BOLD,18);
@@ -39,9 +40,10 @@ public class ViewCategoryForm extends javax.swing.JFrame {
          loadTable();
     }
     
-    private void loadTable(){
+    public void loadTable(){
         try {
             DefaultTableModel dtm=(DefaultTableModel) tblCategories.getModel();
+            dtm.setRowCount(0);
             List<Category> all = controller.getAll();
             for (Category category : all) {
             Object [] row={category.getC_id(),category.getName()};
@@ -63,13 +65,13 @@ public class ViewCategoryForm extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCategories = new javax.swing.JTable();
         lblTitle = new javax.swing.JLabel();
-        lblDelete = new javax.swing.JLabel();
         lblUpdate = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("View Category");
+        setTitle("View Catehory");
 
         pnlBase.setBackground(new java.awt.Color(153, 0, 153));
+        pnlBase.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tblCategories.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         tblCategories.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
@@ -91,24 +93,14 @@ public class ViewCategoryForm extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblCategories);
 
+        pnlBase.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(67, 119, 889, -1));
+
         lblTitle.setBackground(new java.awt.Color(255, 255, 255));
         lblTitle.setFont(new java.awt.Font("Century Gothic", 0, 36)); // NOI18N
         lblTitle.setForeground(new java.awt.Color(255, 255, 255));
         lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitle.setText("Category Details");
-
-        lblDelete.setBackground(new java.awt.Color(51, 0, 255));
-        lblDelete.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        lblDelete.setForeground(new java.awt.Color(255, 255, 255));
-        lblDelete.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblDelete.setText("Delete");
-        lblDelete.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        lblDelete.setOpaque(true);
-        lblDelete.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblDeleteMouseClicked(evt);
-            }
-        });
+        pnlBase.add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(287, 9, 410, 110));
 
         lblUpdate.setBackground(new java.awt.Color(51, 0, 255));
         lblUpdate.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
@@ -122,83 +114,29 @@ public class ViewCategoryForm extends javax.swing.JFrame {
                 lblUpdateMouseClicked(evt);
             }
         });
-
-        javax.swing.GroupLayout pnlBaseLayout = new javax.swing.GroupLayout(pnlBase);
-        pnlBase.setLayout(pnlBaseLayout);
-        pnlBaseLayout.setHorizontalGroup(
-            pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1175, Short.MAX_VALUE)
-            .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(pnlBaseLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(pnlBaseLayout.createSequentialGroup()
-                            .addGap(220, 220, 220)
-                            .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(pnlBaseLayout.createSequentialGroup()
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 889, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(81, 81, 81)
-                            .addComponent(lblDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(pnlBaseLayout.createSequentialGroup()
-                            .addGap(970, 970, 970)
-                            .addComponent(lblUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        pnlBaseLayout.setVerticalGroup(
-            pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 628, Short.MAX_VALUE)
-            .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(pnlBaseLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(pnlBaseLayout.createSequentialGroup()
-                            .addGap(390, 390, 390)
-                            .addComponent(lblDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGap(39, 39, 39)
-                    .addComponent(lblUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
+        pnlBase.add(lblUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(1037, 589, 70, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlBase, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(pnlBase, javax.swing.GroupLayout.PREFERRED_SIZE, 1135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlBase, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(pnlBase, javax.swing.GroupLayout.PREFERRED_SIZE, 658, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void lblDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblDeleteMouseClicked
-        DefaultTableModel dtm=(DefaultTableModel) tblCategories.getModel();
-        if(tblCategories.getSelectedRowCount()>0){
-            JOptionPane.showMessageDialog(this, "select only one row at time", "Warning", JOptionPane.WARNING_MESSAGE);
-        }
-        else if(tblCategories.getSelectedRowCount()==0)
-        JOptionPane.showMessageDialog(this, "select one row at time", "Warning", JOptionPane.WARNING_MESSAGE);
-        else{
-            int  id = (int) dtm.getValueAt(tblCategories.getSelectedRow(), 0);
-            String name =  (String) dtm.getValueAt(tblCategories.getSelectedRow(), 1);
-            
-            Category sup=new Category();
-            sup.setC_id(id);
-            sup.setName(name);
-            
-            JFrame frame= new DeleteCategoryForm(sup);
-            frame.setVisible(true);
-        }
-
-    }//GEN-LAST:event_lblDeleteMouseClicked
-
     private void lblUpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblUpdateMouseClicked
         DefaultTableModel dtm=(DefaultTableModel) tblCategories.getModel();
-        if(tblCategories.getSelectedRowCount()>0){
+        if(tblCategories.getSelectedRowCount()>1){
             JOptionPane.showMessageDialog(this, "select only one row at time", "Warning", JOptionPane.WARNING_MESSAGE);
         }
         else if(tblCategories.getSelectedRowCount()==0)
@@ -209,8 +147,11 @@ public class ViewCategoryForm extends javax.swing.JFrame {
             Category cat=new Category();
             cat.setC_id(id);
             cat.setName(name);
-            JFrame frame= new UpdateCategoryForm(cat);
+            JFrame frame= new UpdateCategoryForm(cat,this);
             frame.setVisible(true);
+            dtm.setRowCount(0);
+            loadTable();
+//            loadTable();
         }
 
     }//GEN-LAST:event_lblUpdateMouseClicked
@@ -249,7 +190,6 @@ public class ViewCategoryForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblDelete;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel lblUpdate;
     private javax.swing.JPanel pnlBase;

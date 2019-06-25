@@ -5,7 +5,9 @@
  */
 package view;
 
+import Font.FontLoader;
 import controller.ItemController;
+import java.awt.Font;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -25,16 +27,17 @@ private ItemController itemcontroller=new ItemController();
     
     public DeleteItemForm() {
         initComponents();
-        this.setSize(772,520);
+//        this.setSize(772,520);
         this.setLocationRelativeTo(null);
         loadTable();
+        view_details.setFont(FontLoader.loadFont(16, Font.PLAIN));
     }
     private void loadTable(){
         try {
             DefaultTableModel dtm=(DefaultTableModel) view_details.getModel();
             List<Item> all = itemcontroller.getAll();
             for (Item elem : all) {
-                Object[] row={elem.getI_id(),elem.getB_id(),elem.getC_id(),elem.getDescription(),elem.getTaking_price(),elem.getThoga_price(),elem.getOur_price(),elem.getWarning(),elem.getQuantity()};
+                Object[] row={elem.getI_id(),elem.getB_id(),elem.getC_id(),elem.getDescription(),elem.getTaking_price(),elem.getShown_price(),elem.getThoga_price(),elem.getOur_price(),elem.getWarning(),elem.getQuantity()};
                 dtm.addRow(row);
             }
         } catch (SQLException ex) {
@@ -82,17 +85,17 @@ private ItemController itemcontroller=new ItemController();
         });
         jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 710, 150, 50));
 
-        view_details.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        view_details.setFont(new java.awt.Font("Nirmala UI", 0, 24)); // NOI18N
         view_details.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Item ID", "Batch ID", "Category ID", "Description", "Taking Price", "Thoga Price", "Our Price", "Warning Level", "Quantity"
+                "Item ID", "Batch ID", "Category ID", "Description", "Taking Price", "Show Price", "Thoga Price", "Our Price", "Warning Level", "Quantity"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Integer.class, java.lang.Double.class
+                java.lang.Long.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Integer.class, java.lang.Double.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -120,7 +123,7 @@ private ItemController itemcontroller=new ItemController();
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
      DefaultTableModel dtm=(DefaultTableModel) view_details.getModel();
-        if(view_details.getSelectedRowCount()>0){
+        if(view_details.getSelectedRowCount()>1){
             JOptionPane.showMessageDialog(this, "select only one row at time", "Warning", JOptionPane.WARNING_MESSAGE);
         }
         else if(view_details.getSelectedRowCount()==0)
@@ -128,7 +131,7 @@ private ItemController itemcontroller=new ItemController();
         else{
         
          try {
-             int  id = (int) dtm.getValueAt(view_details.getSelectedRow(), 0);
+             long  id = (long) dtm.getValueAt(view_details.getSelectedRow(), 0);
              boolean isDeleted = itemcontroller.deleteItem(id);
              if(isDeleted){
                  this.dispose();

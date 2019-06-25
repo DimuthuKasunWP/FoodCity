@@ -17,8 +17,8 @@ public class ItemDao {
         connection=DBConnection.getInstance().getConnection();
     }
     
-    public boolean addItem(String description,int i_id,int c_id,int b_id,double taking_price,double thoga_price,double our_price,int warning,double quantity) throws SQLException{
-        String sql="insert into item values("+i_id+","+b_id+","+c_id+",'"+description+"',"+taking_price+","+thoga_price+","+our_price+",'"+warning+"',"+quantity+")";
+    public boolean addItem(String description,long i_id,int c_id,int b_id,double taking_price,double thoga_price,double our_price,int warning,double quantity,double shown_price) throws SQLException{
+        String sql="insert into item values("+i_id+","+b_id+","+c_id+",'"+description+"',"+taking_price+","+thoga_price+","+our_price+",'"+warning+"',"+quantity+","+shown_price+")";
         Statement stm= connection.createStatement();
         int res = stm.executeUpdate(sql);
         return res>0 ?true:false;
@@ -26,14 +26,16 @@ public class ItemDao {
     }
     
     public boolean updateItem(Item item) throws SQLException{
-        String sql="update item set description='"+item.getDescription()+"',taking_price="+item.getTaking_price()+",thoga_price="+item.getThoga_price()+",our_price="+item.getOur_price()+",warning_level="+item.getWarning()+",qty="+item.getQuantity()+" where c_id='"+item.getI_id()+"'";
+        System.out.println("item id"+item.getI_id());
+        String sql="update item set description='"+item.getDescription()+"',taking_price="+item.getTaking_price()+",thoga_price="+item.getThoga_price()+",ape_price="+item.getOur_price()+",warning_level="+item.getWarning()+",qty="+item.getQuantity()+" ,shown_price="+item.getShown_price()+" where i_id='"+item.getI_id()+"'";
         Statement stm=connection.createStatement();
         int res = stm.executeUpdate(sql);
+        System.out.println("res"+res);
         return res>0 ?true:false;
         
     }
     
-    public Item getItem(int id) throws SQLException{
+    public Item getItem(long id) throws SQLException{
         Item item=new Item();
         String sql="select * from item where i_id="+id+"";
         PreparedStatement stm=connection.prepareStatement(sql);
@@ -42,12 +44,13 @@ public class ItemDao {
             item.setC_id(rst.getInt("c_id"));
             item.setB_id(rst.getInt("b_id"));
             item.setDescription(rst.getString("description"));
-            item.setI_id(rst.getInt("i_id"));
+            item.setI_id(rst.getLong("i_id"));
             item.setOur_price(rst.getDouble("ape_price"));
             item.setTaking_price(rst.getDouble("taking_price"));
             item.setThoga_price(rst.getDouble("thoga_price"));
             item.setWarning(rst.getInt("warning_level"));
             item.setQuantity(rst.getDouble("qty"));
+            item.setShown_price(rst.getDouble("shown_price"));
         }
         return item;
     }
@@ -62,18 +65,19 @@ public class ItemDao {
             item.setC_id(rst.getInt("c_id"));
             item.setB_id(rst.getInt("b_id"));
             item.setDescription(rst.getString("description"));
-            item.setI_id(rst.getInt("i_id"));
+            item.setI_id(rst.getLong("i_id"));
             item.setOur_price(rst.getDouble("ape_price"));
             item.setTaking_price(rst.getDouble("taking_price"));
             item.setThoga_price(rst.getDouble("thoga_price"));
             item.setWarning(rst.getInt("warning_level"));
             item.setQuantity(rst.getDouble("qty"));
+            item.setShown_price(rst.getDouble("shown_price"));
             list.add(item);
         }
         return list;
     }
     
-    public boolean deleteItem(int id) throws SQLException{
+    public boolean deleteItem(long id) throws SQLException{
         String sql="delete from item where i_id="+id+"";
         Statement stm=connection.createStatement();
         int res = stm.executeUpdate(sql);
@@ -97,12 +101,13 @@ public class ItemDao {
             item.setC_id(rst.getInt("c_id"));
             item.setB_id(rst.getInt("b_id"));
             item.setDescription(rst.getString("description"));
-            item.setI_id(rst.getInt("i_id"));
+            item.setI_id(rst.getLong("i_id"));
             item.setOur_price(rst.getDouble("ape_price"));
             item.setTaking_price(rst.getDouble("taking_price"));
             item.setThoga_price(rst.getDouble("thoga_price"));
             item.setWarning(rst.getInt("warning_level"));
             item.setQuantity(rst.getDouble("qty"));
+            item.setShown_price(rst.getDouble("shown_price"));
             list.add(item);
         }
         return list;

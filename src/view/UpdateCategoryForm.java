@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import model.Category;
-import sun.util.logging.PlatformLogger;
+//import sun.util.logging.PlatformLogger;
 
 /**
  *
@@ -20,24 +20,30 @@ import sun.util.logging.PlatformLogger;
  */
 public class UpdateCategoryForm extends javax.swing.JFrame {
     private CategoryController controller=null;
+    private ViewCategoryForm form=null;
     /**
      * Creates new form UpdateCategoryForm
      */
     public UpdateCategoryForm() {
+        controller=new CategoryController();
         initComponents();
         this.setLocationRelativeTo(null);
-        this.setSize(949,491);
+//        this.setSize(949,491);
         
     }
     
-    public UpdateCategoryForm(Category category){
+    public UpdateCategoryForm(Category category,ViewCategoryForm form){
+        controller=new CategoryController();
+        this.form=form;
         initComponents();
         this.setLocationRelativeTo(null);
-        this.setSize(949,491);
+//        this.setSize(949,491);
         
         txtId.setText(Integer.toString(category.getC_id()));
         txtName.setText(category.getName());
     }
+    
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -121,6 +127,7 @@ public class UpdateCategoryForm extends javax.swing.JFrame {
         txtId.setToolTipText("");
         txtId.setBorder(null);
         txtId.setDisabledTextColor(new java.awt.Color(204, 204, 204));
+        txtId.setEnabled(false);
         txtId.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtIdFocusGained(evt);
@@ -131,7 +138,7 @@ public class UpdateCategoryForm extends javax.swing.JFrame {
                 txtIdActionPerformed(evt);
             }
         });
-        pnlBase.add(txtId, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 140, 400, 30));
+        pnlBase.add(txtId, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 140, 400, 30));
         pnlBase.add(sepFour3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 240, 320, 10));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -161,8 +168,10 @@ public class UpdateCategoryForm extends javax.swing.JFrame {
             String id = txtId.getText();
             String name=txtName.getText();
             boolean isDeleted = controller.updateCategory(new Category(Integer.parseInt(id), name));
-            if(isDeleted)
+            if(isDeleted){
+                form.loadTable();
             this.setVisible(false);
+            }
             else{
                 JOptionPane.showMessageDialog(this,"Updated Failed", "Something went wrong", JOptionPane.ERROR);
                 
@@ -174,7 +183,7 @@ public class UpdateCategoryForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSubmitActionPerformed
 
     private void txtIdFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtIdFocusGained
-        txtId.setText("");
+//        txtId.setText("");
     }//GEN-LAST:event_txtIdFocusGained
 
     private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed

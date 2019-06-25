@@ -24,14 +24,14 @@ public class DeleteCategoryForm extends javax.swing.JFrame {
      */
     public DeleteCategoryForm() {
         initComponents();
-        this.setSize(978,468);
+//        this.setSize(978,468);
         this.setLocationRelativeTo(null);
     }
     
     public DeleteCategoryForm(Category category){
      
         initComponents();
-        this.setSize(978,468);
+//        this.setSize(978,468);
         this.setLocationRelativeTo(null);
         txtId.setText(Integer.toString(category.getC_id()));
         txtName.setText(category.getName());
@@ -147,7 +147,7 @@ public class DeleteCategoryForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtIdFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtIdFocusGained
-        txtId.setText("");
+//        txtId.setText("");
     }//GEN-LAST:event_txtIdFocusGained
 
     private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed

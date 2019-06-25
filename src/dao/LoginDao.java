@@ -26,7 +26,9 @@ public class LoginDao {
     
     
     public boolean login(String userName,String password) throws SQLException{
-        String sql="select * from login where username='"+userName+"' and password='"+password+"'";
+//        System.out.println("username"+userName);
+//        System.out.println("password"+password);
+        String sql="select * from login where username='"+userName+"' and pass='"+password+"'";
         Statement stm=connection.createStatement();
         ResultSet rst=stm.executeQuery(sql);
         if(rst.next())

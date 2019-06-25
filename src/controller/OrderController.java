@@ -27,7 +27,7 @@ public class OrderController {
         return dao.placeOrder(order, details);
     }
     
-    public List<Orders> getAll() throws SQLException{
+     public List<Orders> getAll() throws SQLException{
         
        return dao.getAll();
     }
@@ -35,6 +35,5 @@ public class OrderController {
     public List<Orders> getOrderProfit() throws SQLException{
         return dao.getProfit();
     }
-      
     
 }

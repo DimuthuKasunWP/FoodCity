@@ -10,7 +10,7 @@ package model;
  * @author kasun
  */
 public class OrderDetail {
-    private int i_Id;
+    private long i_Id;
     private int o_id;
     private double qty;
     private double price;
@@ -20,7 +20,7 @@ public class OrderDetail {
     public OrderDetail() {
     }
 
-    public OrderDetail(int i_Id, int o_id, double qty, double price,String description,double total) {
+    public OrderDetail(long i_Id, int o_id, double qty, double price,String description,double total) {
         this.i_Id = i_Id;
         this.o_id = o_id;
         this.qty = qty;
@@ -29,11 +29,11 @@ public class OrderDetail {
         this.total=total;
     }
 
-    public int getI_Id() {
+    public long getI_Id() {
         return i_Id;
     }
 
-    public void setI_Id(int i_Id) {
+    public void setI_Id(long i_Id) {
         this.i_Id = i_Id;
     }
 

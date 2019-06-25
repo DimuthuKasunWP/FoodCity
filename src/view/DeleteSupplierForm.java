@@ -25,21 +25,23 @@ public class DeleteSupplierForm extends javax.swing.JFrame {
      */
     public DeleteSupplierForm() {
         initComponents();
-        this.setSize(968,523);
+//        this.setSize(968,523);
     }
     
     public DeleteSupplierForm(Supplier supplier){
         controller=new SupplierController();
         initComponents();
-        this.setSize(968,523);
+//        this.setSize(968,523);
         this.setLocationRelativeTo(null);
         
         txtId.setText(Integer.toString(supplier.getS_id()));
         txtName.setText(supplier.getName());
         txtMobile1.setText(supplier.getMobile().get(0));
+        if(supplier.getMobile().size()>1){
         if(supplier.getMobile().get(1)!=null){
             txtMobile2.setEnabled(true);
             txtMobile2.setText(supplier.getMobile().get(1));
+        }
         }
     }
 
@@ -204,7 +206,7 @@ public class DeleteSupplierForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtIdFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtIdFocusGained
-        txtId.setText("");
+//        txtId.setText("");
     }//GEN-LAST:event_txtIdFocusGained
 
     private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed

@@ -26,27 +26,30 @@ import model.Supplier;
  */
 public class AddBatchForm extends javax.swing.JFrame {
  private BatchController controller;
- private SupplierController supplierController=new SupplierController();
+ private SupplierController supplierController;
     /**
      * Creates new form AddBatchForm
      */
     public AddBatchForm() {
         controller=new BatchController();
+        supplierController=new SupplierController();
         initComponents();
-
+//        this.setSize(817,472);
         this.setLocationRelativeTo(null);
         loadTable();
+        
         
     }
       private void loadTable(){
         try {
+            System.out.println("hello");
             DefaultTableModel dtm=(DefaultTableModel) tblSuppliers.getModel();
             List<Supplier> all = supplierController.getAll();
             for (Supplier supplier : all) {
+                System.out.println("fds"+supplier);
             Object [] row={supplier.getS_id(),supplier.getName(),supplier.getMobile().get(0),supplier.getMobile().get(1)};
             dtm.addRow(row);
             }
-            
         } catch (SQLException ex) {
             Logger.getLogger(ViewSupplierForm.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -71,7 +74,7 @@ public class AddBatchForm extends javax.swing.JFrame {
         tblSuppliers = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Add New");
+        setTitle("Aff New");
 
         pnlBase.setBackground(new java.awt.Color(153, 0, 153));
         pnlBase.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -89,6 +92,7 @@ public class AddBatchForm extends javax.swing.JFrame {
         txtName.setToolTipText("");
         txtName.setBorder(null);
         txtName.setDisabledTextColor(new java.awt.Color(204, 204, 204));
+        txtName.setEnabled(false);
         txtName.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtNameFocusGained(evt);
@@ -118,7 +122,7 @@ public class AddBatchForm extends javax.swing.JFrame {
                 btnSubmitActionPerformed(evt);
             }
         });
-        pnlBase.add(btnSubmit, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 580, 120, 50));
+        pnlBase.add(btnSubmit, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 680, 120, 50));
 
         tblSuppliers.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         tblSuppliers.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
@@ -200,11 +204,11 @@ public class AddBatchForm extends javax.swing.JFrame {
 
     private void tblSuppliersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSuppliersMouseClicked
         DefaultTableModel dtm=(DefaultTableModel) tblSuppliers.getModel();
-        if(tblSuppliers.getSelectedRowCount()>0){
+        if(tblSuppliers.getSelectedRowCount()>1){
             JOptionPane.showMessageDialog(this, "select only one row at time", "Warning", JOptionPane.WARNING_MESSAGE);
         }
         else if(tblSuppliers.getSelectedRowCount()==0)
-            JOptionPane.showMessageDialog(this, "select one row at time", "Warning", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "select one row", "Warning", JOptionPane.WARNING_MESSAGE);
         else{
             
             
