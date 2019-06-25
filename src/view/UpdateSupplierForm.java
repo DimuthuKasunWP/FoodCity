@@ -20,6 +20,7 @@ import model.Supplier;
  */
 public class UpdateSupplierForm extends javax.swing.JFrame {
     private SupplierController controller=null;
+    ViewSupplierForm form=null;
     /**
      * Creates new form UpdateSupplierForm
      */
@@ -28,15 +29,16 @@ public class UpdateSupplierForm extends javax.swing.JFrame {
         
     }
     
-    public UpdateSupplierForm(Supplier supplier){
+    public UpdateSupplierForm(Supplier supplier,ViewSupplierForm form){
         controller=new SupplierController();
+        this.form=form;
         initComponents();
         this.setLocationRelativeTo(null);
-        this.setSize(978,538);
+//        this.setSize(978,538);
         txtId.setText(Integer.toString(supplier.getS_id()));
         txtName.setText(supplier.getName());
         txtMobile1.setText(supplier.getMobile().get(0));
-        if(supplier.getMobile().get(1)!=null){
+        if(supplier.getMobile().size()>1){
             txtMobile2.setEnabled(true);
             txtMobile2.setText(supplier.getMobile().get(1));
         }
@@ -66,7 +68,8 @@ public class UpdateSupplierForm extends javax.swing.JFrame {
         txtName = new javax.swing.JTextField();
         sepFour3 = new javax.swing.JSeparator();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Update");
 
         pnlBase.setBackground(new java.awt.Color(153, 0, 153));
         pnlBase.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -91,6 +94,7 @@ public class UpdateSupplierForm extends javax.swing.JFrame {
         txtId.setToolTipText("");
         txtId.setBorder(null);
         txtId.setDisabledTextColor(new java.awt.Color(204, 204, 204));
+        txtId.setEnabled(false);
         txtId.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtIdFocusGained(evt);
@@ -127,7 +131,6 @@ public class UpdateSupplierForm extends javax.swing.JFrame {
         txtMobile2.setToolTipText("");
         txtMobile2.setBorder(null);
         txtMobile2.setDisabledTextColor(new java.awt.Color(204, 204, 204));
-        txtMobile2.setEnabled(false);
         txtMobile2.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtMobile2FocusGained(evt);
@@ -202,7 +205,7 @@ public class UpdateSupplierForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtIdFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtIdFocusGained
-        txtId.setText("");
+//        txtId.setText("");
     }//GEN-LAST:event_txtIdFocusGained
 
     private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
@@ -233,12 +236,19 @@ public class UpdateSupplierForm extends javax.swing.JFrame {
             String id = txtId.getText();
             String name=txtName.getText();
             String mob1=txtMobile1.getText();
-            String mob2=txtMobile2.getText();
-            ArrayList list=new ArrayList<>();
+            String mob2="";
+            if(!txtMobile2.getText().equals(""))
+             mob2=txtMobile2.getText();
+            ArrayList<String> list=new ArrayList<>();
+            list.add(mob1);
+            if(!mob2.equals("")){
+                list.add(mob2);
+            }
             boolean isDeleted = controller.updateSupplier(new Supplier(Integer.parseInt(id), name,list));
-            if(isDeleted)
+            if(isDeleted){
             this.setVisible(false);
-            else{
+            form.loadTable();
+            }else{
                 JOptionPane.showMessageDialog(this,"Updated Failed", "Something went wrong", JOptionPane.ERROR);
                 txtId.setText("");
                 txtMobile1.setText("");

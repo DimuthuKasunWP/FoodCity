@@ -23,7 +23,7 @@ public class AddCategoryForm extends javax.swing.JFrame {
      */
     public AddCategoryForm() {
         initComponents();
-        this.setSize(983,480);
+//        this.setSize(983,480);
         this.setLocationRelativeTo(null);
     }
 
@@ -43,7 +43,8 @@ public class AddCategoryForm extends javax.swing.JFrame {
         lblName = new javax.swing.JLabel();
         btnSubmit = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Add New");
 
         pnlBase.setBackground(new java.awt.Color(153, 0, 153));
         pnlBase.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -56,7 +57,7 @@ public class AddCategoryForm extends javax.swing.JFrame {
         pnlBase.add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 20, 410, 110));
 
         txtName.setBackground(new java.awt.Color(153, 0, 153));
-        txtName.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        txtName.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         txtName.setForeground(new java.awt.Color(255, 255, 255));
         txtName.setText("Enter Name Here");
         txtName.setToolTipText("");
@@ -72,7 +73,7 @@ public class AddCategoryForm extends javax.swing.JFrame {
                 txtNameActionPerformed(evt);
             }
         });
-        pnlBase.add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 210, 400, 30));
+        pnlBase.add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 210, 310, 30));
         pnlBase.add(sepFour1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 240, 320, 10));
 
         lblName.setBackground(new java.awt.Color(255, 255, 255));

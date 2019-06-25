@@ -5,8 +5,24 @@
  */
 package view;
 
+import Font.FontLoader;
+import Font.LoadKalani;
 import controller.ItemController;
 import controller.OrderController;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
+import java.awt.print.PageFormat;
+import java.awt.print.Paper;
+import java.awt.print.Printable;
+import static java.awt.print.Printable.NO_SUCH_PAGE;
+import static java.awt.print.Printable.PAGE_EXISTS;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -14,6 +30,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.print.PrintService;
+import javax.print.PrintServiceLookup;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
@@ -30,21 +48,41 @@ public class DashBoard extends javax.swing.JFrame {
     List<OrderDetail> temp=new ArrayList<>();
     private ItemController controller=new ItemController();
     private OrderController orderController=new OrderController();
-    private boolean isLoaded=false;
+            int rowIndex=0;
+            double qty=0;
+            double price=0.0;
+            double Grandtotal=0.0;
+            double profit=0.0;
+            double itemQty=0.0;
+            String givenValue;
+            double customerProfit=0.0;
+            int goodCount=0;
+            int billCount=0;
+            boolean isError=false;
+    private int item_quantity;
+    private double item_quantity_d;
     /**
      * Creates new form DashBoard
      */
     public DashBoard() {
+        
         initComponents();
-        this.setSize(1441,768);
+        jTable1.setFont(FontLoader.loadFont(18, Font.PLAIN));
+        this.setSize(1463,842);
+//        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+//        pack();
+//        setSize(screenSize.width,screenSize.height);
         this.setLocationRelativeTo(null);
         buttonGroup1.add(jRadioButton1);
         buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setSelected(true);
+//        jRadioButton2.setSelected(true);
         txtItemId.requestFocus();
         txtQty.setText(""+1);
         txtProfit.setText(""+0.0);
         txtGrandPrice.setText(""+0.0);
+         txtProfit.setText(""+0.0);
+        txtGrandPrice.setText(""+0.0);
+        txtName.setFont(FontLoader.loadFont(16, Font.PLAIN));
          loadData();
     }
     public DashBoard(Item item){
@@ -56,34 +94,35 @@ public class DashBoard extends javax.swing.JFrame {
         txtGrandPrice.setText(""+0.0);
     }
     public void loadData(Item item){
-        isLoaded=true;
-        txtProfit.setText(""+0.0);
-        txtGrandPrice.setText(""+0.0);
-        txtItemId.requestFocus();
-        jRadioButton2.setSelected(true);
-        txtItemId.setText(Integer.toString(item.getI_id()));
-        txtDescription.setText(item.getDescription());
-        txtName6.setText(Double.toString(item.getThoga_price()));
-        txtName1.setText(Double.toString(item.getTaking_price()));
-        txtPrice.setText(Double.toString(item.getOur_price()));
+//        System.out.println("taking price"+item.getTaking_price());
+        this.itemQty=item.getQuantity();
+        txtQty.requestFocus();
+        txtItemId.setText(Long.toString(item.getI_id()));
+//        jRadioButton2.setSelected(true);
+        txtItemId.setText(Long.toString(item.getI_id()));
+        txtName.setText(item.getDescription());
+        txtThogaPrice.setText(Double.toString(item.getThoga_price()));
+        txtSillaraPrice.setText(Double.toString(item.getShown_price()));
+        txtOurPrice.setText(Double.toString(item.getOur_price()));
+        txtShowPrice.setText(Double.toString(item.getShown_price()));
         buttonGroup1.add(jRadioButton1);
         buttonGroup1.add(jRadioButton2);
         txtQty.setText(""+1);
         if(jRadioButton1.isSelected())
-            txtPrice.setText(Double.toString(item.getThoga_price()));
+            txtOurPrice.setText(Double.toString(item.getThoga_price()));
         else
-            txtPrice.setText(Double.toString(item.getTaking_price()));
+            txtOurPrice.setText(Double.toString(item.getOur_price()));
     }
     private void loadData(){
-        txtProfit.setText(""+0.0);
-        txtGrandPrice.setText(""+0.0);
+        
         txtItemId.requestFocus();
         jRadioButton2.setSelected(true);
         txtItemId.setText("");
-        txtDescription.setText("");
-        txtName6.setText("");
-        txtName1.setText("");
-        txtPrice.setText("");
+        txtName.setText("");
+        txtThogaPrice.setText("");
+        txtSillaraPrice.setText("");
+        txtOurPrice.setText("");
+        txtShowPrice.setText("");
         txtQty.setText(""+1);
     }
     
@@ -98,6 +137,7 @@ public class DashBoard extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -115,19 +155,19 @@ public class DashBoard extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
-        txtName1 = new javax.swing.JTextField();
+        txtSillaraPrice = new javax.swing.JTextField();
         sepFour3 = new javax.swing.JSeparator();
         txtItemId = new javax.swing.JTextField();
         sepFour4 = new javax.swing.JSeparator();
-        txtDescription = new javax.swing.JTextField();
+        txtName = new javax.swing.JTextField();
         sepFour5 = new javax.swing.JSeparator();
         txtProfit = new javax.swing.JTextField();
         sepFour7 = new javax.swing.JSeparator();
-        txtName6 = new javax.swing.JTextField();
+        txtThogaPrice = new javax.swing.JTextField();
         sepFour8 = new javax.swing.JSeparator();
         txtGrandPrice = new javax.swing.JTextField();
         sepFour9 = new javax.swing.JSeparator();
-        txtPrice = new javax.swing.JTextField();
+        txtOurPrice = new javax.swing.JTextField();
         sepFour10 = new javax.swing.JSeparator();
         txtQty = new javax.swing.JTextField();
         sepFour11 = new javax.swing.JSeparator();
@@ -136,6 +176,12 @@ public class DashBoard extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
+        txtShowPrice = new javax.swing.JTextField();
+        lblName = new javax.swing.JLabel();
+        sepFour1 = new javax.swing.JSeparator();
+        btnEdit = new javax.swing.JButton();
+        lblBanner = new javax.swing.JLabel();
+        btnCheck = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -149,8 +195,12 @@ public class DashBoard extends javax.swing.JFrame {
         jMenu5 = new javax.swing.JMenu();
         jMenuItem15 = new javax.swing.JMenuItem();
         jMenuItem17 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuItem6 = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("DashBoard");
 
         jPanel1.setBackground(new java.awt.Color(153, 0, 153));
@@ -181,7 +231,7 @@ public class DashBoard extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Thoga Price");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 80, 150, 40));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 80, 150, 40));
 
         jLabel4.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -197,12 +247,32 @@ public class DashBoard extends javax.swing.JFrame {
         jRadioButton1.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         jRadioButton1.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton1.setText("Thoga");
+        jRadioButton1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jRadioButton1StateChanged(evt);
+            }
+        });
+        jRadioButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jRadioButton1MouseClicked(evt);
+            }
+        });
         jPanel1.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 170, 120, 40));
 
         jRadioButton2.setBackground(new java.awt.Color(153, 0, 153));
         jRadioButton2.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         jRadioButton2.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton2.setText("Sillara");
+        jRadioButton2.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jRadioButton2StateChanged(evt);
+            }
+        });
+        jRadioButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jRadioButton2MouseClicked(evt);
+            }
+        });
         jPanel1.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 170, 130, 40));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 210, -1, -1));
 
@@ -217,7 +287,7 @@ public class DashBoard extends javax.swing.JFrame {
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 260, 120, 40));
 
         jTable1.setBackground(new java.awt.Color(255, 255, 51));
-        jTable1.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        jTable1.setFont(new java.awt.Font("Nirmala UI", 1, 18)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -227,26 +297,33 @@ public class DashBoard extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class
+                java.lang.Long.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
         jScrollPane1.setViewportView(jTable1);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 950, 320));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 950, -1));
 
         jLabel11.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Profit");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 430, 100, 35));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 520, 100, 35));
 
         jLabel12.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Grand Price");
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 510, 160, 35));
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 600, 160, 35));
 
         jButton2.setBackground(new java.awt.Color(0, 0, 255));
         jButton2.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
@@ -257,25 +334,25 @@ public class DashBoard extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1210, 610, 120, 40));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1240, 710, 120, 40));
 
-        txtName1.setBackground(new java.awt.Color(153, 0, 153));
-        txtName1.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
-        txtName1.setForeground(new java.awt.Color(255, 255, 255));
-        txtName1.setToolTipText("");
-        txtName1.setBorder(null);
-        txtName1.setDisabledTextColor(new java.awt.Color(204, 204, 204));
-        txtName1.addFocusListener(new java.awt.event.FocusAdapter() {
+        txtSillaraPrice.setBackground(new java.awt.Color(153, 0, 153));
+        txtSillaraPrice.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        txtSillaraPrice.setForeground(new java.awt.Color(255, 255, 255));
+        txtSillaraPrice.setToolTipText("");
+        txtSillaraPrice.setBorder(null);
+        txtSillaraPrice.setDisabledTextColor(new java.awt.Color(204, 204, 204));
+        txtSillaraPrice.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                txtName1FocusGained(evt);
+                txtSillaraPriceFocusGained(evt);
             }
         });
-        txtName1.addActionListener(new java.awt.event.ActionListener() {
+        txtSillaraPrice.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtName1ActionPerformed(evt);
+                txtSillaraPriceActionPerformed(evt);
             }
         });
-        jPanel1.add(txtName1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1210, 80, 150, 30));
+        jPanel1.add(txtSillaraPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(1210, 80, 150, 30));
         jPanel1.add(sepFour3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1210, 110, 130, 10));
 
         txtItemId.setBackground(new java.awt.Color(153, 0, 153));
@@ -295,28 +372,33 @@ public class DashBoard extends javax.swing.JFrame {
                 txtItemIdActionPerformed(evt);
             }
         });
+        txtItemId.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtItemIdKeyPressed(evt);
+            }
+        });
         jPanel1.add(txtItemId, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 170, 30));
-        jPanel1.add(sepFour4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 110, 140, 10));
+        jPanel1.add(sepFour4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 110, 160, 10));
 
-        txtDescription.setBackground(new java.awt.Color(153, 0, 153));
-        txtDescription.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
-        txtDescription.setForeground(new java.awt.Color(255, 255, 255));
-        txtDescription.setText("Enter Name");
-        txtDescription.setToolTipText("");
-        txtDescription.setBorder(null);
-        txtDescription.setDisabledTextColor(new java.awt.Color(204, 204, 204));
-        txtDescription.addFocusListener(new java.awt.event.FocusAdapter() {
+        txtName.setBackground(new java.awt.Color(153, 0, 153));
+        txtName.setFont(new java.awt.Font("Nirmala UI", 0, 24)); // NOI18N
+        txtName.setForeground(new java.awt.Color(255, 255, 255));
+        txtName.setText("Enter Name");
+        txtName.setToolTipText("");
+        txtName.setBorder(null);
+        txtName.setDisabledTextColor(new java.awt.Color(204, 204, 204));
+        txtName.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                txtDescriptionFocusGained(evt);
+                txtNameFocusGained(evt);
             }
         });
-        txtDescription.addActionListener(new java.awt.event.ActionListener() {
+        txtName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDescriptionActionPerformed(evt);
+                txtNameActionPerformed(evt);
             }
         });
-        jPanel1.add(txtDescription, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 80, 170, 30));
-        jPanel1.add(sepFour5, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 110, 150, 10));
+        jPanel1.add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 80, 210, 30));
+        jPanel1.add(sepFour5, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 110, 210, 10));
 
         txtProfit.setBackground(new java.awt.Color(153, 0, 153));
         txtProfit.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
@@ -334,26 +416,26 @@ public class DashBoard extends javax.swing.JFrame {
                 txtProfitActionPerformed(evt);
             }
         });
-        jPanel1.add(txtProfit, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 430, 210, 30));
-        jPanel1.add(sepFour7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 460, 210, 10));
+        jPanel1.add(txtProfit, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 520, 210, 30));
+        jPanel1.add(sepFour7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 550, 210, 10));
 
-        txtName6.setBackground(new java.awt.Color(153, 0, 153));
-        txtName6.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
-        txtName6.setForeground(new java.awt.Color(255, 255, 255));
-        txtName6.setToolTipText("");
-        txtName6.setBorder(null);
-        txtName6.setDisabledTextColor(new java.awt.Color(204, 204, 204));
-        txtName6.addFocusListener(new java.awt.event.FocusAdapter() {
+        txtThogaPrice.setBackground(new java.awt.Color(153, 0, 153));
+        txtThogaPrice.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        txtThogaPrice.setForeground(new java.awt.Color(255, 255, 255));
+        txtThogaPrice.setToolTipText("");
+        txtThogaPrice.setBorder(null);
+        txtThogaPrice.setDisabledTextColor(new java.awt.Color(204, 204, 204));
+        txtThogaPrice.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                txtName6FocusGained(evt);
+                txtThogaPriceFocusGained(evt);
             }
         });
-        txtName6.addActionListener(new java.awt.event.ActionListener() {
+        txtThogaPrice.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtName6ActionPerformed(evt);
+                txtThogaPriceActionPerformed(evt);
             }
         });
-        jPanel1.add(txtName6, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 80, 130, 30));
+        jPanel1.add(txtThogaPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 80, 130, 30));
         jPanel1.add(sepFour8, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 110, 130, 10));
 
         txtGrandPrice.setBackground(new java.awt.Color(153, 0, 153));
@@ -372,27 +454,27 @@ public class DashBoard extends javax.swing.JFrame {
                 txtGrandPriceActionPerformed(evt);
             }
         });
-        jPanel1.add(txtGrandPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 510, 210, 30));
-        jPanel1.add(sepFour9, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 540, 210, 10));
+        jPanel1.add(txtGrandPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 600, 210, 30));
+        jPanel1.add(sepFour9, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 630, 210, 10));
 
-        txtPrice.setBackground(new java.awt.Color(153, 0, 153));
-        txtPrice.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
-        txtPrice.setForeground(new java.awt.Color(255, 255, 255));
-        txtPrice.setText("Enter Price");
-        txtPrice.setToolTipText("");
-        txtPrice.setBorder(null);
-        txtPrice.setDisabledTextColor(new java.awt.Color(204, 204, 204));
-        txtPrice.addFocusListener(new java.awt.event.FocusAdapter() {
+        txtOurPrice.setBackground(new java.awt.Color(153, 0, 153));
+        txtOurPrice.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        txtOurPrice.setForeground(new java.awt.Color(255, 255, 255));
+        txtOurPrice.setText("Enter Price");
+        txtOurPrice.setToolTipText("");
+        txtOurPrice.setBorder(null);
+        txtOurPrice.setDisabledTextColor(new java.awt.Color(204, 204, 204));
+        txtOurPrice.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                txtPriceFocusGained(evt);
+                txtOurPriceFocusGained(evt);
             }
         });
-        txtPrice.addActionListener(new java.awt.event.ActionListener() {
+        txtOurPrice.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPriceActionPerformed(evt);
+                txtOurPriceActionPerformed(evt);
             }
         });
-        jPanel1.add(txtPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 260, 140, 30));
+        jPanel1.add(txtOurPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 260, 140, 30));
         jPanel1.add(sepFour10, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 290, 130, 10));
 
         txtQty.setBackground(new java.awt.Color(153, 0, 153));
@@ -450,7 +532,7 @@ public class DashBoard extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 250, 270, 40));
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 340, 270, 40));
 
         jButton5.setBackground(new java.awt.Color(51, 0, 255));
         jButton5.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
@@ -461,18 +543,68 @@ public class DashBoard extends javax.swing.JFrame {
                 jButton5ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 320, 270, 40));
+        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 410, 270, 40));
 
         btnDelete.setBackground(new java.awt.Color(51, 0, 255));
-        btnDelete.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
-        btnDelete.setForeground(new java.awt.Color(255, 255, 255));
+        btnDelete.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         btnDelete.setText("Delete");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeleteActionPerformed(evt);
             }
         });
-        jPanel1.add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 610, 130, 40));
+        jPanel1.add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 720, 130, 40));
+
+        txtShowPrice.setBackground(new java.awt.Color(153, 0, 153));
+        txtShowPrice.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        txtShowPrice.setForeground(new java.awt.Color(255, 255, 255));
+        txtShowPrice.setText("Enter Price Here");
+        txtShowPrice.setToolTipText("");
+        txtShowPrice.setBorder(null);
+        txtShowPrice.setDisabledTextColor(new java.awt.Color(204, 204, 204));
+        txtShowPrice.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtShowPriceFocusGained(evt);
+            }
+        });
+        txtShowPrice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtShowPriceActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtShowPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 180, 310, 30));
+
+        lblName.setBackground(new java.awt.Color(255, 255, 255));
+        lblName.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        lblName.setForeground(new java.awt.Color(255, 255, 255));
+        lblName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblName.setText("Show Price");
+        jPanel1.add(lblName, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 150, 230, 80));
+        jPanel1.add(sepFour1, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 210, 320, 10));
+
+        btnEdit.setBackground(new java.awt.Color(0, 0, 255));
+        btnEdit.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        btnEdit.setText("Edit");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 670, 130, 40));
+
+        lblBanner.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Asset/rsz_10whatsapp_image_2019-06-23_at_225016.jpg"))); // NOI18N
+        jPanel1.add(lblBanner, new org.netbeans.lib.awtextra.AbsoluteConstraints(1187, 170, 240, 90));
+
+        btnCheck.setBackground(new java.awt.Color(51, 0, 255));
+        btnCheck.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        btnCheck.setForeground(new java.awt.Color(255, 255, 255));
+        btnCheck.setText("CHECK");
+        btnCheck.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCheckActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnCheck, new org.netbeans.lib.awtextra.AbsoluteConstraints(1170, 650, 230, 50));
 
         jMenuBar1.setBackground(new java.awt.Color(153, 0, 153));
 
@@ -491,6 +623,11 @@ public class DashBoard extends javax.swing.JFrame {
 
         jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F2, 0));
         jMenuItem3.setText("View ");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem3);
 
         jMenuBar1.add(jMenu1);
@@ -501,10 +638,20 @@ public class DashBoard extends javax.swing.JFrame {
 
         jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F3, 0));
         jMenuItem5.setText("Add ");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem5);
 
         jMenuItem8.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, 0));
         jMenuItem8.setText("View");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem8);
 
         jMenuBar1.add(jMenu2);
@@ -515,10 +662,20 @@ public class DashBoard extends javax.swing.JFrame {
 
         jMenuItem9.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F5, 0));
         jMenuItem9.setText("Daily Income");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem9);
 
         jMenuItem10.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F6, 0));
         jMenuItem10.setText("Income Per Order");
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem10);
 
         jMenuBar1.add(jMenu3);
@@ -538,9 +695,46 @@ public class DashBoard extends javax.swing.JFrame {
 
         jMenuItem17.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F8, 0));
         jMenuItem17.setText("View");
+        jMenuItem17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem17ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem17);
 
+        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F9, 0));
+        jMenuItem2.setText("Low Level Items");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jMenuItem2);
+
+        jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F10, 0));
+        jMenuItem4.setText("Update Item");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jMenuItem4);
+
         jMenuBar1.add(jMenu5);
+
+        jMenu4.setText("Batch");
+        jMenu4.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+
+        jMenuItem6.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F11, 0));
+        jMenuItem6.setText("Add Batch");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem6);
+
+        jMenuBar1.add(jMenu4);
 
         setJMenuBar(jMenuBar1);
 
@@ -548,44 +742,74 @@ public class DashBoard extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1462, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 808, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
+       new AddSupplierForm().setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void txtName1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtName1FocusGained
-        txtName1.setText(null);
-    }//GEN-LAST:event_txtName1FocusGained
+    private void txtSillaraPriceFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSillaraPriceFocusGained
+        txtSillaraPrice.setText(null);
+    }//GEN-LAST:event_txtSillaraPriceFocusGained
 
-    private void txtName1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtName1ActionPerformed
+    private void txtSillaraPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSillaraPriceActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtName1ActionPerformed
+    }//GEN-LAST:event_txtSillaraPriceActionPerformed
 
     private void txtItemIdFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtItemIdFocusGained
-        if(!isLoaded)
-        txtItemId.setText(null);
+         txtItemId.setText(null);
     }//GEN-LAST:event_txtItemIdFocusGained
 
     private void txtItemIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtItemIdActionPerformed
-        txtQty.requestFocus();
+       
+        try {
+            //        txtQty.requestFocus();
+//        System.out.println("done");
+            
+            txtQty.setText(""+1);
+            Item item = controller.getItem(Long.parseLong(txtItemId.getText()));
+            if(item!=null){
+//                System.out.println("taking price"+item.getTaking_price());
+                this.itemQty=item.getQuantity();
+            txtItemId.setText(Long.toString(item.getI_id()));
+//        jRadioButton2.setSelected(true);
+        txtItemId.setText(Long.toString(item.getI_id()));
+        txtName.setText(item.getDescription());
+        txtThogaPrice.setText(Double.toString(item.getThoga_price()));
+        txtSillaraPrice.setText(Double.toString(item.getShown_price()));
+        txtOurPrice.setText(Double.toString(item.getOur_price()));
+        txtShowPrice.setText(Double.toString(item.getShown_price()));
+        buttonGroup1.add(jRadioButton1);
+        buttonGroup1.add(jRadioButton2);
+        txtQty.setText(""+1);
+        if(jRadioButton1.isSelected())
+            txtOurPrice.setText(Double.toString(item.getThoga_price()));
+        else
+            txtOurPrice.setText(Double.toString(item.getOur_price()));
+        btnAdd.doClick();
+            }else{
+                JOptionPane.showMessageDialog(this, "No such a item. Add it using Add new Item","Warning",JOptionPane.WARNING_MESSAGE);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DashBoard.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_txtItemIdActionPerformed
 
-    private void txtDescriptionFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDescriptionFocusGained
-        txtDescription.setText(null);
-    }//GEN-LAST:event_txtDescriptionFocusGained
+    private void txtNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNameFocusGained
+        txtName.setText(null);
+    }//GEN-LAST:event_txtNameFocusGained
 
-    private void txtDescriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescriptionActionPerformed
+    private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtDescriptionActionPerformed
+    }//GEN-LAST:event_txtNameActionPerformed
 
     private void txtProfitFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtProfitFocusGained
         txtProfit.setText(null);
@@ -596,13 +820,13 @@ public class DashBoard extends javax.swing.JFrame {
         txtProfit.setText("");
     }//GEN-LAST:event_txtProfitActionPerformed
 
-    private void txtName6FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtName6FocusGained
-        txtName6.setText(null);
-    }//GEN-LAST:event_txtName6FocusGained
+    private void txtThogaPriceFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtThogaPriceFocusGained
+        txtThogaPrice.setText(null);
+    }//GEN-LAST:event_txtThogaPriceFocusGained
 
-    private void txtName6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtName6ActionPerformed
+    private void txtThogaPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtThogaPriceActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtName6ActionPerformed
+    }//GEN-LAST:event_txtThogaPriceActionPerformed
 
     private void txtGrandPriceFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtGrandPriceFocusGained
          txtGrandPrice.setText(null);
@@ -612,13 +836,13 @@ public class DashBoard extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtGrandPriceActionPerformed
 
-    private void txtPriceFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPriceFocusGained
-        txtPrice.setText(null);
-    }//GEN-LAST:event_txtPriceFocusGained
+    private void txtOurPriceFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtOurPriceFocusGained
+        txtOurPrice.setText(null);
+    }//GEN-LAST:event_txtOurPriceFocusGained
 
-    private void txtPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPriceActionPerformed
+    private void txtOurPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtOurPriceActionPerformed
         btnAdd.doClick();
-    }//GEN-LAST:event_txtPriceActionPerformed
+    }//GEN-LAST:event_txtOurPriceActionPerformed
 
     private void txtQtyFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtQtyFocusGained
         txtQty.setText("");
@@ -634,101 +858,143 @@ public class DashBoard extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-            boolean isAvailable=false;
-            int rowIndex=0;
-            double qty=0;
-            double price=0.0;
-            double Grandtotal=0.0;
-            double profit=0.0;
+       if(itemQty>=Double.parseDouble(txtQty.getText())){
+        if(!txtItemId.getText().equals("")){
+        boolean isAvailable=false;
+            
            int rowCount = jTable1.getRowCount();
             DefaultTableModel dtm= (DefaultTableModel) jTable1.getModel();
             for (int count = 0; count < dtm.getRowCount(); count++){
-                if(dtm.getValueAt(count, 0).toString().equals(txtItemId.getText().trim())){
+                if(dtm.getValueAt(count, 0).toString().equals(txtItemId.getText())){
+//                    System.out.println("second");
                     isAvailable=true;
                     rowIndex=count;
                 }
             
             }
             if(!isAvailable){
-            String description=txtDescription.getText();
+            String description=txtName.getText();
             qty= Double.parseDouble(txtQty.getText());
-            price=Double.parseDouble(txtPrice.getText());
-            int i_id=Integer.parseInt(txtItemId.getText());
+//                System.out.println("jfldkajsfas"+txtOurPrice.getText());
+            price=Double.parseDouble(txtOurPrice.getText());
+//            System.out.println("jlfds"+price);
+            long i_id=Long.parseLong(txtItemId.getText());
             double total=0;
             if(cmbRatio.getSelectedItem().toString().equals("NONE")){
+//                System.out.println(cmbRatio.getSelectedItem().toString());
+//                System.out.println("none"+qty+"fdf"+price);
                 total=qty*price;
             }else if(cmbRatio.getSelectedItem().toString().equals("G")){
+//                System.out.println("g"+qty+"fdf"+price);
                 total=qty*(price/1000);
             }else{
+//                System.out.println("ml"+qty+"fdf"+price);
                 total=qty*(price/1000);
             }
             Object row[]= {i_id,description,qty,price,total};
             dtm.addRow(row);
             }else{
-                int previousQty=(int) dtm.getValueAt(rowIndex, 2);
+                qty= Double.parseDouble(txtQty.getText());
+                price=Double.parseDouble(txtOurPrice.getText());
+                double previousQty=(double) dtm.getValueAt(rowIndex, 2);
+//                System.out.println("previous qty"+previousQty);
+                
                 dtm.setValueAt(previousQty+qty, rowIndex, 2);
                 double newTotal=((previousQty+qty)*price);
                 dtm.setValueAt(newTotal, rowIndex, 4);
             }
             int newRowCount=jTable1.getRowCount();
             dtm= (DefaultTableModel) jTable1.getModel();
+//            if(isAvailable)
+            int previousCount=dtm.getRowCount();
             for (int count = 0; count < dtm.getRowCount(); count++){
                 try {
-                    Grandtotal+=(double)dtm.getValueAt(count, 4);
-                    
-                    Item item = controller.getItem((int)dtm.getValueAt(count, 0));
-                    double sellingPrice=(double)dtm.getValueAt(count, 4);
+//                    System.out.println("counting GrandTotal"+(double)dtm.getValueAt(count, 4));
+                       
+//                    Grandtotal=(double)dtm.getValueAt(count, 4);
+//                    Grandtotal+=(double)dtm.getValueAt(count, 4);
+//                    System.out.println("grand total"+Grandtotal);
+                    Item item = controller.getItem((long)dtm.getValueAt(count, 0));
+                    double sellingPrice=(double)dtm.getValueAt(count, 3);
+//                    System.out.println("selling price"+sellingPrice);
                     double normalPrice=(double)dtm.getValueAt(count, 2)*item.getTaking_price();
-                    profit+=sellingPrice-normalPrice;
+//                    System.out.println("normal price"+normalPrice);
+                    
+//                    profit=sellingPrice*(double)dtm.getValueAt(count, 2)-normalPrice;
                             } catch (SQLException ex) {
                     Logger.getLogger(DashBoard.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             
+//             for (int count = 0; count < dtm.getRowCount(); count++){
+//                 if((double)dtm.getValueAt(count, 2)>1&&!(dtm.getRowCount()>1))
+//                 Grandtotal=(double)dtm.getValueAt(count, 4);
+//                 else
+//                      Grandtotal+=(double)dtm.getValueAt(count, 4);
+//             }
                     txtProfit.setText(""+profit);
                     txtGrandPrice.setText(""+Grandtotal);
-            
+                     loadData();
+       }
+       }else
+           JOptionPane.showMessageDialog(this,"Quantity is bigger than existing quantity","Warning",JOptionPane.WARNING_MESSAGE);
             
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         int rowCount = jTable1.getRowCount();
-         
+         temp.clear();
         DefaultTableModel dtm=(DefaultTableModel) jTable1.getModel();
-        for (int count = 0; count < dtm.getRowCount(); count++){
+        if(dtm.getRowCount()!=0){
+        for (int count = dtm.getRowCount()-1; count >=0; count--){
             OrderDetail detail=new OrderDetail();
-            detail.setI_Id(Integer.parseInt(dtm.getValueAt(count, 0).toString()));
+            detail.setI_Id((long)dtm.getValueAt(count, 0));
             detail.setDescription(dtm.getValueAt(count, 1).toString());
             detail.setPrice(Double.parseDouble(dtm.getValueAt(count,3 ).toString()));
             detail.setQty(Double.parseDouble(dtm.getValueAt(count,2 ).toString()));
             detail.setTotal(Double.parseDouble(dtm.getValueAt(count,4).toString()));
             temp.add(detail);
+            dtm.removeRow(count);
+//            System.out.println("row co");
+//            count=dtm.getRowCount();
+//            jTable1.remove(count);
         }
-        jTable1.removeAll();
+        }else{
+            JOptionPane.showMessageDialog(this,"No items in table");
+        }
+        txtItemId.requestFocus();
+        
         
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        jTable1.removeAll();
+
         DefaultTableModel dtm=(DefaultTableModel) jTable1.getModel();
+        dtm.setRowCount(0);
         for (OrderDetail detail : temp) {
-            Object [] row={detail.getI_Id(),detail.getDescription(),detail.getPrice(),detail.getQty(),detail.getTotal()};
+            Object [] row={detail.getI_Id(),detail.getDescription(),detail.getQty(),detail.getPrice(),detail.getTotal()};
             dtm.addRow(row);
         }
+        txtItemId.requestFocus();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void cmbRatioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbRatioActionPerformed
-        txtPrice.selectAll();
-        txtPrice.requestFocus();
+//        txtOurPrice.selectAll();
+//        txtOurPrice.requestFocus();
     }//GEN-LAST:event_cmbRatioActionPerformed
 
     private void cmbRatioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmbRatioMouseClicked
-        txtPrice.selectAll();
-        txtPrice.requestFocus();
+        txtOurPrice.selectAll();
+        txtOurPrice.requestFocus();
     }//GEN-LAST:event_cmbRatioMouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-            Orders orders=new Orders();
+        goodCount=0;
+        customerProfit=0;
+        btnCheck.doClick();
+        billCount++;
+        
+        Orders orders=new Orders();
             orders.setProfit(Double.parseDouble(txtProfit.getText()));
             orders.setTime(new Timestamp(new Date().getTime()));
             
@@ -737,29 +1003,151 @@ public class DashBoard extends javax.swing.JFrame {
          
         DefaultTableModel dtm=(DefaultTableModel) jTable1.getModel();
         for (int count = 0; count < dtm.getRowCount(); count++){
-                try {
+                
+            try {
+                    goodCount++;
+                    Item items = controller.getItem((long)dtm.getValueAt(count,0));
+                    
+                    double qty=(double)dtm.getValueAt(count, 2);
+                    if(!(items.getQuantity()<=qty)){
+                        
+//              profit+=((double)dtm.getValueAt(count, 3))*(qty)-(item.getTaking_price()*qty);
+                    customerProfit+=(items.getShown_price()-((double)dtm.getValueAt(count, 3)))*qty;
+//                    System.out.println("qty"+qty);
+                    System.out.println("hello"+(items.getShown_price()-((double)dtm.getValueAt(count, 3))));
                     OrderDetail detail=new OrderDetail();
-                    detail.setDescription((String) dtm.getValueAt(count, 0));
-                    detail.setI_Id((int) dtm.getValueAt(count,0));
+                    detail.setDescription(Long.toString((long) dtm.getValueAt(count, 0)));
+                    detail.setI_Id((long) dtm.getValueAt(count,0));
                     detail.setPrice((double) dtm.getValueAt(count,3));
-                    Item item = controller.getItem((int) dtm.getValueAt(count,0));
+                    Item item = controller.getItem((long) dtm.getValueAt(count,0));
                     detail.setQty(item.getQuantity()-((double) dtm.getValueAt(count, 2)));
+                    System.out.println("item quantity"+(item.getQuantity()-((double) dtm.getValueAt(count, 2))));
                     detail.setTotal((double) dtm.getValueAt(count, 4));
                     list.add(detail);
+                    }else{
+                        isError=true;
+                        JOptionPane.showMessageDialog(this, "low stock");
+                        dtm.removeRow(count);
+//                        dtm.setRowCount(0);
+                    }
                 } catch (SQLException ex) {
                     Logger.getLogger(DashBoard.class.getName()).log(Level.SEVERE, null, ex);
                 }
         }
+        if(!isError){
+             givenValue=JOptionPane.showInputDialog(this, "enter given money","Information",JOptionPane.INFORMATION_MESSAGE);
+              if(givenValue==null){
+                 JOptionPane.showMessageDialog(this, "Order Canceled");
+                 loadData();
+                 dtm.setRowCount(0);
+             }else{
         boolean isOrderPlaced = orderController.placeOrder(orders, list);
         if(isOrderPlaced){
+            
+            
+             
+             if(givenValue==null){
+                 JOptionPane.showMessageDialog(this, "Order Canceled");
+                 loadData();
+                 dtm.setRowCount(0);
+             }else{
+                 
+            int value=Integer.parseInt(givenValue.trim());
+            if(value>=Grandtotal){
+                System.out.println("one"+value);
+            PrinterJob pj=PrinterJob.getPrinterJob();
+            PrintService service=PrintServiceLookup.lookupDefaultPrintService();
+            
+//       if(service!=null){
+//        try{
+//        System.out.println(service);
+//        File outputFile = new File("2010-10-10"+"-Recibo"+"print"+".xps");
+//        
+//        Doc doc = new SimpleDoc(new billprintable(), DocFlavor.SERVICE_FORMATTED.PRINTABLE, null);
+//     
+//        PrintRequestAttributeSet attributes = new HashPrintRequestAttributeSet();
+//        attributes.add(new Copies(1)outputFile);
+//
+//        DocPrintJob job = service.createPrintJob();
+//        job.print(doc, attributes);
+//    } catch(Exception e){
+//        System.out.println("kaboom"+e);
+//    }
+//}
+                try {
+                    pj.setPrintService(service);
+                    pj.setPrintable(new billprintable(),getPage(pj));
+                    pj.print();
+                } catch (PrinterException ex) {
+                    Logger.getLogger(DashBoard.class.getName()).log(Level.SEVERE, null, ex);
+              }
             loadData();
-        }else{
-            JOptionPane.showMessageDialog(this,"Something went wrong","Error",JOptionPane.ERROR);
+            txtGrandPrice.setText(""+0.0);
+            txtProfit.setText(""+0.0);
+            for (int count = dtm.getRowCount()-1; count >=0; count--){
+            dtm.removeRow(count);
+//            jTable1.remove(count);
+            
         }
+            dtm.setRowCount(0);
+//            jTable1.removeAll();
+            }else{
+                System.out.println("second");
+               givenValue = JOptionPane.showInputDialog(this, "enter a valid amount","Warning", JOptionPane.INFORMATION_MESSAGE);
+                if(givenValue==null){
+                 JOptionPane.showMessageDialog(this, "Order Canceled");
+                }else{
+               
+                 PrinterJob pj=PrinterJob.getPrinterJob();
+            PrintService service=PrintServiceLookup.lookupDefaultPrintService();
+            
+//       if(service!=null){
+//        try{
+//        System.out.println(service);
+//        File outputFile = new File("2010-10-10"+"-Recibo"+"print"+".xps");
+//        
+//        Doc doc = new SimpleDoc(new billprintable(), DocFlavor.SERVICE_FORMATTED.PRINTABLE, null);
+//     
+//        PrintRequestAttributeSet attributes = new HashPrintRequestAttributeSet();
+//        attributes.add(new Copies(1)outputFile);
+//
+//        DocPrintJob job = service.createPrintJob();
+//        job.print(doc, attributes);
+//    } catch(Exception e){
+//        System.out.println("kaboom"+e);
+//    }
+//}
+                try {
+                    pj.setPrintService(service);
+                    pj.setPrintable(new billprintable(),getPage(pj));
+                    pj.print();
+                } catch (PrinterException ex) {
+                    Logger.getLogger(DashBoard.class.getName()).log(Level.SEVERE, null, ex);
+              }
+            loadData();
+            txtGrandPrice.setText(""+0.0);
+            txtProfit.setText(""+0.0);
+            for (int count = dtm.getRowCount()-1; count >=0; count--){
+            dtm.removeRow(count);
+//            jTable1.remove(count);
+            
+        }
+            dtm.setRowCount(0);
+                }
+            }
+             }   
+        }else{
+            JOptionPane.showMessageDialog(this,"Something went wrong","Error",JOptionPane.ERROR_MESSAGE);
+        }
+        profit=0.0;
+        Grandtotal=0.0;
+              }
+        }
+        isError=false;
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
-        // TODO add your handling code here:
+        new AddItemForm().setVisible(true);
     }//GEN-LAST:event_jMenuItem15ActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
@@ -773,7 +1161,118 @@ public class DashBoard extends javax.swing.JFrame {
                 dtm.removeRow(selectedRows[count]);
             }
         }
+        txtItemId.requestFocus();
     }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void txtShowPriceFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtShowPriceFocusGained
+        txtShowPrice.setText("");
+    }//GEN-LAST:event_txtShowPriceFocusGained
+
+    private void txtShowPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtShowPriceActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtShowPriceActionPerformed
+
+    private void jRadioButton1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jRadioButton1StateChanged
+        txtOurPrice.setText(txtThogaPrice.getText());
+    }//GEN-LAST:event_jRadioButton1StateChanged
+
+    private void jRadioButton2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jRadioButton2StateChanged
+        txtOurPrice.setText(txtSillaraPrice.getText());
+    }//GEN-LAST:event_jRadioButton2StateChanged
+
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        int selectedCount = jTable1.getSelectedRowCount();
+        if(selectedCount<=0){
+            JOptionPane.showMessageDialog(this, "Select a row","Warning",JOptionPane.WARNING_MESSAGE);
+        }else{
+            String showInputDialog = JOptionPane.showInputDialog(this, "Enter new Quantity", "Edit Quantity", JOptionPane.INFORMATION_MESSAGE);
+            DefaultTableModel dtm= (DefaultTableModel) jTable1.getModel();
+            dtm.setValueAt(Double.parseDouble(showInputDialog),jTable1.getSelectedRow() , 2);
+            double newTotal=Double.parseDouble(showInputDialog)*((double)dtm.getValueAt(jTable1.getSelectedRow(), 3));
+            dtm.setValueAt(newTotal, jTable1.getSelectedRow() , 4);
+           
+        }
+        txtItemId.requestFocus();
+    }//GEN-LAST:event_btnEditActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        new ViewSupplierForm().setVisible(true);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        new AddCategoryForm().setVisible(true);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        new ViewCategoryForm().setVisible(true);
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+            new DailyIncomeForm().setVisible(true);
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+            new IncomePerOrderForm().setVisible(true);
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
+
+    private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
+           new ViewItemForm().setVisible(true);
+    }//GEN-LAST:event_jMenuItem17ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+            new UpdateItemForm().setVisible(true);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+         new AddBatchForm().setVisible(true);
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        new WarningLevelForm().setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void btnCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckActionPerformed
+        Grandtotal=0.0;
+        profit=0.0;
+        DefaultTableModel dtm=(DefaultTableModel) jTable1.getModel();
+        for(int count=0;count<dtm.getRowCount();count++){
+          try {
+//              System.out.println("jflkdsjkaf;"+dtm.getRowCount());
+//              goodCount++;
+              Grandtotal+=(double)dtm.getValueAt(count,4);
+              Item item = controller.getItem((long)dtm.getValueAt(count,0));
+              double qty=(double)dtm.getValueAt(count, 2);
+              System.out.println("quantity"+qty);
+              profit+=((double)dtm.getValueAt(count, 3))*(qty)-(item.getTaking_price()*qty);
+//              customerProfit+=(item.getShown_price()-((double)dtm.getValueAt(count, 3)))*qty;
+                      } catch (SQLException ex) {
+              Logger.getLogger(DashBoard.class.getName()).log(Level.SEVERE, null, ex);
+          }
+        }
+        
+                    txtProfit.setText(""+profit);
+                    txtGrandPrice.setText(""+Grandtotal);
+//                    Grandtotal=0;
+//                    profit=0;
+                    txtItemId.requestFocus();
+        
+        
+    }//GEN-LAST:event_btnCheckActionPerformed
+
+    private void jRadioButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton1MouseClicked
+       txtItemId.requestFocus();
+      
+    }//GEN-LAST:event_jRadioButton1MouseClicked
+
+    private void jRadioButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton2MouseClicked
+        txtItemId.requestFocus();
+    }//GEN-LAST:event_jRadioButton2MouseClicked
+
+    private void txtItemIdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtItemIdKeyPressed
+            if (evt.getKeyCode()==KeyEvent.VK_SPACE){
+                jButton2.doClick();
+            }
+    }//GEN-LAST:event_txtItemIdKeyPressed
 
     /**
      * @param args the command line arguments
@@ -809,8 +1308,11 @@ public class DashBoard extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnCheck;
     private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnEdit;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JComboBox<String> cmbRatio;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -828,14 +1330,18 @@ public class DashBoard extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem17;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPanel jPanel1;
@@ -844,6 +1350,9 @@ public class DashBoard extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lblBanner;
+    private javax.swing.JLabel lblName;
+    private javax.swing.JSeparator sepFour1;
     private javax.swing.JSeparator sepFour10;
     private javax.swing.JSeparator sepFour11;
     private javax.swing.JSeparator sepFour3;
@@ -852,13 +1361,190 @@ public class DashBoard extends javax.swing.JFrame {
     private javax.swing.JSeparator sepFour7;
     private javax.swing.JSeparator sepFour8;
     private javax.swing.JSeparator sepFour9;
-    private javax.swing.JTextField txtDescription;
     private javax.swing.JTextField txtGrandPrice;
     private javax.swing.JTextField txtItemId;
-    private javax.swing.JTextField txtName1;
-    private javax.swing.JTextField txtName6;
-    private javax.swing.JTextField txtPrice;
+    private javax.swing.JTextField txtName;
+    private javax.swing.JTextField txtOurPrice;
     private javax.swing.JTextField txtProfit;
     private javax.swing.JTextField txtQty;
+    private javax.swing.JTextField txtShowPrice;
+    private javax.swing.JTextField txtSillaraPrice;
+    private javax.swing.JTextField txtThogaPrice;
     // End of variables declaration//GEN-END:variables
+    public PageFormat getPage(PrinterJob print){
+        
+        PageFormat pf=print.defaultPage();
+        Paper paper=pf.getPaper();
+        int row_count=jTable1.getRowCount();
+        double cm_per_item=3.0;
+        double middleHeight=row_count*cm_per_item;
+        double headerHeight=4.0;
+        double footerHeight=4.0;
+        double width=convert_CM_to_PPI(8);
+      //  double width=20.32;
+        double height=convert_CM_to_PPI(middleHeight+headerHeight+footerHeight);
+//        System.out.println(height);
+        paper.setSize(width, height);
+        paper.setImageableArea(0,2,width, height);
+        pf.setOrientation(PageFormat.PORTRAIT);
+        pf.setPaper(paper);
+        
+        return pf;
+        
+    }
+    
+    protected static double convert_CM_to_PPI(double cm){
+        return toPPI(cm*0.393600787);
+    }
+    
+    protected static double toPPI(double inch){
+        return inch*72d;
+    }
+    public int countRow(){
+        return jTable1.getRowCount();
+    }
+    
+    public double paidAmount(){
+//        if(Double.parseDouble(givenValue)>Double.parseDouble(txtGrandPrice.getText()))
+        return Double.parseDouble(givenValue);
+         
+//        return 20000.00;
+    }
+    public class billprintable implements Printable{
+    
+    @Override    
+    public int print(Graphics graphics,PageFormat pageformat,int pageIndex){
+        int result=NO_SUCH_PAGE;
+        if(pageIndex==0){
+            Graphics2D g2d=(Graphics2D)graphics;
+            double width=pageformat.getImageableWidth();
+            System.out.println(width);
+            g2d.translate((int)pageformat.getImageableX(),(int)pageformat.getImageableY());
+            FontMetrics metrics=g2d.getFontMetrics(new Font("Arial",Font.BOLD,5));
+            int idLength=metrics.stringWidth("000");
+            int x_length=1;
+            int smtLength=metrics.stringWidth("000000");
+            int qtyLength=metrics.stringWidth("00000");
+            int priceLength=metrics.stringWidth("000000");
+            int productLength=(int)width-idLength-qtyLength-priceLength-17;
+            int productPosition=0;
+            int discountPosition=productLength+5;
+            int pricePosition=discountPosition+idLength+10;
+            int qtyPosition=pricePosition+priceLength+4;
+            int amtPosition=qtyPosition+qtyLength;
+            
+            try{
+                int y=20;
+                int yShift=10;
+//                int headerRectHeight=15;
+//                int headerRectHeighta=40;
+//                String pn1a="ksdnknv";
+//                String pn2a="kdlkvmvf";
+//                String pn3a="dnawodnofw";
+//                String pn4a="dnalknkeo";
+//                int pp1a=10;
+//                int pp2a=10;
+//                int pp3a=10;
+//                int pp4a=10;
+//                int sum=pp1a+pp2a+pp3a+pp4a;
+//                new Font("Nirmala UI",Font.PLAIN,14)
+// ට්‍  ඩර්ස්    
+//ට්‍රේඩර්  ස්   
+                g2d.setFont (FontLoader.loadFont(14, Font.BOLD));
+                g2d.drawString("       රසාංජන ටේඩර්ස්                                                                                                                                                                                                                               "
+                        + "    ",10,y);y+=4;
+                g2d.setFont (FontLoader.loadFont(8, Font.BOLD));
+                g2d.drawString("                                          U                                                                                                                                                                                                                         "
+                        + "    ",1,y); y+=yShift;
+               // g2d.drawString("විරාෂා ටේඩර්ස් ",5,y);y+=yShift;
+                g2d.setFont(FontLoader.loadFont(9, Font.PLAIN));
+                g2d.drawString("   නො:100 පරණ පාර, කොරළවැ ල්ල, මොරටුව                                         "
+                        + "         ",10,y);y+=yShift;
+                g2d.setFont(FontLoader.loadFont(10, Font.PLAIN));
+                g2d.drawString("Tel 071-6302364 / 071-5875426",30,y);y+=yShift+2;
+                g2d.setFont(FontLoader.loadFont(9, Font.PLAIN));
+                g2d.drawString("බිල්පත් අංකය : "+billCount                                                                       
+                        + "         ",1,y);y+=yShift+2;
+                g2d.setFont(FontLoader.loadFont(10, Font.PLAIN));
+                g2d.drawString("Staff :- None",1,y);
+                g2d.setFont(FontLoader.loadFont(10, Font.PLAIN));
+                g2d.drawString("Cash : admin",100,y);y+=yShift;
+                g2d.setFont(FontLoader.loadFont(12, Font.PLAIN));
+                g2d.drawString("=================================================================================================================",1,y); y+=yShift;
+                g2d.drawString("පමාණය                                                             "//pramanaya
+                        + "",x_length,y);x_length+=40;
+                        g2d.setFont (FontLoader.loadFont(7, Font.PLAIN));
+                g2d.drawString(" U                                                                                                                                                                                                                         "
+                        + "    ",1,y+3); 
+                g2d.setFont(FontLoader.loadFont(12, Font.PLAIN));
+                g2d.drawString("   සඳහන් මිල                                                                            "
+                        + "  ",x_length,y);x_length+=60;
+                g2d.drawString("   අපේ මිල                                                                                  "
+                        + "        ",x_length,y);x_length+=47;
+                g2d.drawString("   ඵකතුව                                                                               "
+                        + "      ",x_length,y);y+=yShift;
+                g2d.drawString("------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------",1,y);y+=yShift;
+                for(int i=0;i<countRow();i++){
+                    g2d.setFont(FontLoader.loadFont(10, Font.PLAIN));
+                     int x_length_temp=1;
+                     String item_name=jTable1.getValueAt(i,1).toString();
+                     String combo_selected=cmbRatio.getSelectedItem().toString();
+                     String total_per_item=jTable1.getValueAt(i,4).toString();
+                     String our_price=jTable1.getValueAt(i,3).toString();
+                     g2d.drawString(item_name,1,y);y+=yShift;
+                     if(combo_selected=="none"){
+                         item_quantity=Integer.parseInt(jTable1.getValueAt(i,2).toString());
+                         g2d.drawString(String.valueOf(item_quantity),x_length_temp, y);x_length_temp+=55;
+                     }  
+                     else{
+                         item_quantity_d=Double.parseDouble(jTable1.getValueAt(i,2).toString());
+                         g2d.drawString(String.valueOf(item_quantity_d),x_length_temp, y);x_length_temp+=60;
+                     } 
+                        long id=(long) jTable1.getValueAt(i,0);
+                    Item item = controller.getItem(id);
+                        g2d.drawString(Double.toString(item.getShown_price()),x_length_temp, y);x_length_temp+=60;
+                        g2d.drawString(our_price,x_length_temp, y);x_length_temp+=45;
+                        g2d.drawString(total_per_item,x_length_temp,y);y+=yShift+1;
+                
+                }
+               
+                g2d.drawString("------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ ",1,y);y+=yShift;
+                g2d.setFont(FontLoader.loadFont(12, Font.PLAIN));
+                g2d.drawString("       උප ඵකතුව :               " + txtGrandPrice.getText().toString()
+                        + "       ", 15, y);y+=yShift+4;
+                g2d.drawString("       මුලු ඵකතුව :               " + txtGrandPrice.getText().toString()
+                        + "       ", 15, y);y+=yShift+6;
+                g2d.drawString("***  ගෙවීම්  ***                                                                         "
+                        + "       ", 1, y);y+=yShift+3;
+                g2d.drawString("                ගෙවූ මුදල          "+ String.valueOf(paidAmount())                                                                                  
+                        + "       ", 10, y);y+=yShift+5;
+                g2d.drawString("                ඉතිරි මුදල          " + String.valueOf(paidAmount()-(Double.parseDouble(txtGrandPrice.getText().toString())))
+                        + "       ", 10, y);y+=yShift+5;    
+                g2d.drawString(" ඔබ ලැබූ ලාභය  : " +customerProfit     
+                        + "       ", 1, y);y+=yShift+4;      
+                g2d.drawString(" භාණ්ඩ සංඛ්‍යාව  : " +goodCount    
+                        + "       ", 1, y);y+=yShift+4;      
+                g2d.drawString("================================================================================================================= " , 2, y);y+=yShift+8;
+                g2d.setFont(FontLoader.loadFont(12, Font.PLAIN));
+                g2d.drawString(" දිනය  හා වේලාව  : "
+                        + "       ", 1, y);y+=yShift+4; 
+                     g2d.setFont(FontLoader.loadFont(12, Font.PLAIN));   
+                 g2d.drawString( new Date().toString(),1, y);y+=yShift+10;   
+                 g2d.setFont(FontLoader.loadFont(14, Font.BOLD));
+                g2d.drawString("***  ස්තූතියි නැවත ඵන්න !  ***                                                                                          "     
+                        + "       ", 2, y);y+=yShift+4;         
+                
+                
+                
+                
+                
+                
+            }catch(Exception ex){
+                
+            }
+            result=PAGE_EXISTS;
+        }
+        return result;
+    }
+    }
 }

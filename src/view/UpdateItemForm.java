@@ -5,7 +5,9 @@
  */
 package view;
 
+import Font.FontLoader;
 import controller.ItemController;
+import java.awt.Font;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,29 +26,54 @@ private ItemController controller=null;
      */
     public UpdateItemForm() {
         initComponents();
+        controller=new ItemController();
         this.setLocationRelativeTo(null);
-        this.setSize(1366,696);
+//        this.setSize(1366,696);
+        itemId.setText(null);
+        description.setFont(FontLoader.loadFont(24, Font.PLAIN));
 //        loadData();
     }
+    public void setBatchId(int id){
+        itemBatchId.setText(""+id);
+    }
+    public void setCategoryId(String name){
+        itemCategoryName.setText(name);
+    }
+    
+    public void resetdata(){
+        itemBatchId.setText("");
+        thogaPrice.setText("");
+        itemQuantity.setText("");
+        ourPrice.setText("");
+        itemTakingPrice.setText("");
+        itemId.setText("");
+        itemCategoryName.setText("");
+        description.setText("");
+        warningLevel.setText("");
+        txtShowPrice.setText("");
+    }
+
     
     public UpdateItemForm(Item item){
         controller=new ItemController();
          initComponents();
         this.setLocationRelativeTo(null);
-        this.setSize(1366,696);
+//        this.setSize(1366,696);
         loadData(item);
         isLoaded=true;
     }
     private void loadData(Item item){
+        System.out.println("fdsfa"+item.getDescription());
         itemBatchId.setText(Integer.toString(item.getB_id()));
         thogaPrice.setText(Double.toString(item.getThoga_price()));
         itemQuantity.setText(Double.toString(item.getQuantity()));
         ourPrice.setText(Double.toString(item.getOur_price()));
-        itemPrice.setText(Double.toString(item.getTaking_price()));
-        itemId.setText(Integer.toString(item.getI_id()));
+        itemTakingPrice.setText(Double.toString(item.getTaking_price()));
+        itemId.setText(Long.toString(item.getI_id()));
         itemCategoryName.setText(Integer.toString(item.getC_id()));
         description.setText(item.getDescription());
         warningLevel.setText(Integer.toString(item.getWarning()));
+        txtShowPrice.setText(Double.toString(item.getShown_price()));
         
         
     }
@@ -78,7 +105,7 @@ private ItemController controller=null;
         itemQuantity = new javax.swing.JTextField();
         sepFour5 = new javax.swing.JSeparator();
         jLabel7 = new javax.swing.JLabel();
-        itemPrice = new javax.swing.JTextField();
+        itemTakingPrice = new javax.swing.JTextField();
         sepFour7 = new javax.swing.JSeparator();
         jLabel8 = new javax.swing.JLabel();
         itemId = new javax.swing.JTextField();
@@ -86,6 +113,10 @@ private ItemController controller=null;
         select_batchId = new javax.swing.JButton();
         ourPrice = new javax.swing.JTextField();
         sepFour6 = new javax.swing.JSeparator();
+        jLabel11 = new javax.swing.JLabel();
+        txtShowPrice = new javax.swing.JTextField();
+        sepFour9 = new javax.swing.JSeparator();
+        select_batchId1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -94,7 +125,8 @@ private ItemController controller=null;
         warningLevel = new javax.swing.JTextField();
         enter_btn = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Update Items");
 
         pnlBase.setBackground(new java.awt.Color(153, 0, 153));
 
@@ -110,32 +142,32 @@ private ItemController controller=null;
         jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Batch ID");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 130, 40));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 130, 40));
 
         jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Thoga Price");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 160, 40));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 160, 40));
 
         jLabel3.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Quantity");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 140, 40));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 140, 40));
 
         jLabel5.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Our Price");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, 200, 40));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 200, 40));
 
         jLabel6.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Price");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 430, 120, 40));
+        jLabel6.setText("Taking Price");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 480, 150, 40));
 
         itemCategoryName.setBackground(new java.awt.Color(153, 0, 153));
         itemCategoryName.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         itemCategoryName.setForeground(new java.awt.Color(255, 255, 255));
-        itemCategoryName.setText("Enter Category Id Here");
+        itemCategoryName.setText("Enter Category Id");
         itemCategoryName.setToolTipText("");
         itemCategoryName.setBorder(null);
         itemCategoryName.setDisabledTextColor(new java.awt.Color(204, 204, 204));
@@ -149,9 +181,9 @@ private ItemController controller=null;
                 itemCategoryNameActionPerformed(evt);
             }
         });
-        jPanel1.add(itemCategoryName, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 590, 330, 30));
+        jPanel1.add(itemCategoryName, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 560, 300, 30));
         jPanel1.add(sepFour1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 180, 320, 0));
-        jPanel1.add(sepFour2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 620, 350, 10));
+        jPanel1.add(sepFour2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 590, 300, 10));
 
         itemBatchId.setBackground(new java.awt.Color(153, 0, 153));
         itemBatchId.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
@@ -170,8 +202,8 @@ private ItemController controller=null;
                 itemBatchIdActionPerformed(evt);
             }
         });
-        jPanel1.add(itemBatchId, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 110, 240, 30));
-        jPanel1.add(sepFour3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 140, 290, 10));
+        jPanel1.add(itemBatchId, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 160, 240, 30));
+        jPanel1.add(sepFour3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 190, 290, 10));
 
         thogaPrice.setBackground(new java.awt.Color(153, 0, 153));
         thogaPrice.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
@@ -190,8 +222,8 @@ private ItemController controller=null;
                 thogaPriceActionPerformed(evt);
             }
         });
-        jPanel1.add(thogaPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 190, 310, 30));
-        jPanel1.add(sepFour4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 220, 320, 10));
+        jPanel1.add(thogaPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 240, 310, 30));
+        jPanel1.add(sepFour4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 270, 320, 10));
 
         itemQuantity.setBackground(new java.awt.Color(153, 0, 153));
         itemQuantity.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
@@ -210,38 +242,38 @@ private ItemController controller=null;
                 itemQuantityActionPerformed(evt);
             }
         });
-        jPanel1.add(itemQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 270, 310, 30));
-        jPanel1.add(sepFour5, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 300, 320, 10));
+        jPanel1.add(itemQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 320, 310, 30));
+        jPanel1.add(sepFour5, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 350, 320, 10));
 
         jLabel7.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Item ID");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 510, 160, 40));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 160, 40));
 
-        itemPrice.setBackground(new java.awt.Color(153, 0, 153));
-        itemPrice.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
-        itemPrice.setForeground(new java.awt.Color(255, 255, 255));
-        itemPrice.setText("Enter Price Here");
-        itemPrice.setToolTipText("");
-        itemPrice.setBorder(null);
-        itemPrice.setDisabledTextColor(new java.awt.Color(204, 204, 204));
-        itemPrice.addFocusListener(new java.awt.event.FocusAdapter() {
+        itemTakingPrice.setBackground(new java.awt.Color(153, 0, 153));
+        itemTakingPrice.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        itemTakingPrice.setForeground(new java.awt.Color(255, 255, 255));
+        itemTakingPrice.setText("Enter Price Here");
+        itemTakingPrice.setToolTipText("");
+        itemTakingPrice.setBorder(null);
+        itemTakingPrice.setDisabledTextColor(new java.awt.Color(204, 204, 204));
+        itemTakingPrice.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                itemPriceFocusGained(evt);
+                itemTakingPriceFocusGained(evt);
             }
         });
-        itemPrice.addActionListener(new java.awt.event.ActionListener() {
+        itemTakingPrice.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemPriceActionPerformed(evt);
+                itemTakingPriceActionPerformed(evt);
             }
         });
-        jPanel1.add(itemPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 430, 310, 30));
-        jPanel1.add(sepFour7, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 460, 320, 10));
+        jPanel1.add(itemTakingPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 480, 310, 30));
+        jPanel1.add(sepFour7, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 510, 270, 10));
 
         jLabel8.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Category Id");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 590, 210, 40));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 560, 210, 40));
 
         itemId.setBackground(new java.awt.Color(153, 0, 153));
         itemId.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
@@ -260,8 +292,8 @@ private ItemController controller=null;
                 itemIdActionPerformed(evt);
             }
         });
-        jPanel1.add(itemId, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 510, 310, 30));
-        jPanel1.add(sepFour8, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 540, 320, 10));
+        jPanel1.add(itemId, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 100, 310, 30));
+        jPanel1.add(sepFour8, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 130, 320, 10));
 
         select_batchId.setBackground(new java.awt.Color(0, 0, 255));
         select_batchId.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
@@ -271,7 +303,7 @@ private ItemController controller=null;
                 select_batchIdActionPerformed(evt);
             }
         });
-        jPanel1.add(select_batchId, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 110, 140, 40));
+        jPanel1.add(select_batchId, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 150, -1, 40));
 
         ourPrice.setBackground(new java.awt.Color(153, 0, 153));
         ourPrice.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
@@ -290,8 +322,43 @@ private ItemController controller=null;
                 ourPriceActionPerformed(evt);
             }
         });
-        jPanel1.add(ourPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 350, 290, 30));
-        jPanel1.add(sepFour6, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 380, 300, 10));
+        jPanel1.add(ourPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 400, 290, 30));
+        jPanel1.add(sepFour6, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 430, 300, 10));
+
+        jLabel11.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("Show Price");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 620, 160, 40));
+
+        txtShowPrice.setBackground(new java.awt.Color(153, 0, 153));
+        txtShowPrice.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        txtShowPrice.setForeground(new java.awt.Color(255, 255, 255));
+        txtShowPrice.setText("Enter Show Price Here");
+        txtShowPrice.setToolTipText("");
+        txtShowPrice.setBorder(null);
+        txtShowPrice.setDisabledTextColor(new java.awt.Color(204, 204, 204));
+        txtShowPrice.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtShowPriceFocusGained(evt);
+            }
+        });
+        txtShowPrice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtShowPriceActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtShowPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 620, 310, 30));
+        jPanel1.add(sepFour9, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 650, 320, 10));
+
+        select_batchId1.setBackground(new java.awt.Color(0, 0, 255));
+        select_batchId1.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        select_batchId1.setText("Choose");
+        select_batchId1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                select_batchId1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(select_batchId1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 550, 130, 40));
 
         jPanel2.setBackground(new java.awt.Color(204, 0, 204));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -303,7 +370,7 @@ private ItemController controller=null;
 
         description.setBackground(new java.awt.Color(204, 0, 204));
         description.setColumns(20);
-        description.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        description.setFont(new java.awt.Font("Nirmala UI", 0, 24)); // NOI18N
         description.setForeground(new java.awt.Color(255, 255, 255));
         description.setRows(5);
         jScrollPane1.setViewportView(description);
@@ -423,20 +490,34 @@ private ItemController controller=null;
         // TODO add your handling code here:
     }//GEN-LAST:event_itemQuantityActionPerformed
 
-    private void itemPriceFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_itemPriceFocusGained
-        itemPrice.setText(null);
-    }//GEN-LAST:event_itemPriceFocusGained
+    private void itemTakingPriceFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_itemTakingPriceFocusGained
+        itemTakingPrice.setText(null);
+    }//GEN-LAST:event_itemTakingPriceFocusGained
 
-    private void itemPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemPriceActionPerformed
+    private void itemTakingPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemTakingPriceActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_itemPriceActionPerformed
+    }//GEN-LAST:event_itemTakingPriceActionPerformed
 
     private void itemIdFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_itemIdFocusGained
-        itemId.setText(null);
+
     }//GEN-LAST:event_itemIdFocusGained
 
     private void itemIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemIdActionPerformed
-        // TODO add your handling code here:
+    try {
+        if(!(itemId.getText().toCharArray().length>18)){
+        Item item = controller.getItem(Long.parseLong(itemId.getText()));
+        if(item!=null)
+        loadData(item);
+        else
+            JOptionPane.showMessageDialog(this, "No such a item. Add it using Add new Item","Warning",JOptionPane.WARNING_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(this,"enter again");
+            itemId.setText("");
+        }
+        
+    } catch (SQLException ex) {
+        Logger.getLogger(UpdateItemForm.class.getName()).log(Level.SEVERE, null, ex);
+    }
     }//GEN-LAST:event_itemIdActionPerformed
 
     private void select_batchIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_select_batchIdActionPerformed
@@ -462,33 +543,53 @@ private ItemController controller=null;
 
     private void enter_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enter_btnActionPerformed
         try {
-            String id = itemBatchId.getText();
-            int item_id=Integer.parseInt(id);
+            String id = itemId.getText();
+            
+            long item_id=Long.parseLong(id);
             String category_name=itemCategoryName.getText();
 
             int category_id=Integer.parseInt(itemCategoryName.getText());
 
             double thoga_price=Double.parseDouble(thogaPrice.getText());
-            double quantity=Integer.parseInt(itemQuantity.getText());
-            double item_price=Double.parseDouble(itemPrice.getText());
-            int batch_id=Integer.parseInt(itemId.getText());
-            double taking_price=Double.parseDouble(warningLevel.getText());
+            double quantity=Double.parseDouble(itemQuantity.getText());
+            double item_price=Double.parseDouble(itemTakingPrice.getText());
+            int batch_id=Integer.parseInt(itemBatchId.getText());
+            System.out.println("fdslkfajd"+itemTakingPrice.getText());
+            double taking_price=Double.parseDouble(itemTakingPrice.getText());
             double our_price=Double.parseDouble(ourPrice.getText());
             String item_description=description.getText();
             int warning=Integer.parseInt(warningLevel.getText());
-             Item  item=new Item(item_id,batch_id,category_id,item_description,taking_price,thoga_price,our_price,warning,quantity);
+            double show_price=Double.parseDouble(txtShowPrice.getText());
+             Item  item=new Item(item_id,batch_id,category_id,item_description,taking_price,thoga_price,our_price,show_price,warning,quantity);
             boolean isUpdated = controller.updateItem(item);
-            if(isUpdated)
-            this.setVisible(false);
-            else{
-                JOptionPane.showMessageDialog(this,"Update Failed", "Something went wrong", JOptionPane.ERROR);
+            if(isUpdated){
+                resetdata();
+            JOptionPane.showMessageDialog(this,"Update Success");
+//                System.out.println("done updating");
+//            this.setVisible(false);
+            }else{
+                JOptionPane.showMessageDialog(this,"Update Failed", "Something went wrong", JOptionPane.ERROR_MESSAGE);
                 itemCategoryName.setText("");
             }
+            itemId.requestFocus();
 
         } catch (SQLException ex) {
             Logger.getLogger(AddSupplierForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_enter_btnActionPerformed
+
+    private void txtShowPriceFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtShowPriceFocusGained
+        txtShowPrice.setText("");
+    }//GEN-LAST:event_txtShowPriceFocusGained
+
+    private void txtShowPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtShowPriceActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtShowPriceActionPerformed
+
+    private void select_batchId1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_select_batchId1ActionPerformed
+        //       this.dispose();
+        new GetCategoryDetails(this).setVisible(true);
+    }//GEN-LAST:event_select_batchId1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -531,10 +632,11 @@ private ItemController controller=null;
     private javax.swing.JTextField itemBatchId;
     private javax.swing.JTextField itemCategoryName;
     private javax.swing.JTextField itemId;
-    private javax.swing.JTextField itemPrice;
     private javax.swing.JTextField itemQuantity;
+    private javax.swing.JTextField itemTakingPrice;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -549,6 +651,7 @@ private ItemController controller=null;
     private javax.swing.JTextField ourPrice;
     private javax.swing.JPanel pnlBase;
     private javax.swing.JButton select_batchId;
+    private javax.swing.JButton select_batchId1;
     private javax.swing.JSeparator sepFour1;
     private javax.swing.JSeparator sepFour2;
     private javax.swing.JSeparator sepFour3;
@@ -557,7 +660,9 @@ private ItemController controller=null;
     private javax.swing.JSeparator sepFour6;
     private javax.swing.JSeparator sepFour7;
     private javax.swing.JSeparator sepFour8;
+    private javax.swing.JSeparator sepFour9;
     private javax.swing.JTextField thogaPrice;
+    private javax.swing.JTextField txtShowPrice;
     private javax.swing.JTextField warningLevel;
     // End of variables declaration//GEN-END:variables
 }

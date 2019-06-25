@@ -10,20 +10,22 @@ package model;
  * @author kasun
  */
 public class Item {
-    private int i_id;
+    private long i_id;
     private int b_id;
     private int c_id;
     private String description=null;
     private double taking_price;
     private double thoga_price;
     private double our_price;
+    private double shown_price;
     private int warning;
     private double quantity;
+    
 
     public Item() {
     }
 
-    public Item(int i_id, int b_id, int c_id,String description,double taking_price,double thoga_price,double our_price,int warning,double quantity) {
+    public Item(long i_id, int b_id, int c_id,String description,double taking_price,double thoga_price,double our_price,double shown_price,int warning,double quantity) {
         this.i_id = i_id;
         this.b_id = b_id;
         this.c_id = c_id;
@@ -33,13 +35,14 @@ public class Item {
         this.our_price=our_price;
         this.warning=warning;
         this.quantity=quantity;
+        this.shown_price=shown_price;
     }
 
-    public int getI_id() {
+    public long getI_id() {
         return i_id;
     }
 
-    public void setI_id(int i_id) {
+    public void setI_id(long i_id) {
         this.i_id = i_id;
     }
 
@@ -57,6 +60,14 @@ public class Item {
 
     public void setC_id(int c_id) {
         this.c_id = c_id;
+    }
+
+    public double getShown_price() {
+        return shown_price;
+    }
+
+    public void setShown_price(double shown_price) {
+        this.shown_price = shown_price;
     }
     
     public void setDescription(String description){
@@ -83,12 +94,12 @@ public class Item {
         return thoga_price;
     }
     
-    public void setOur_price(double thoga_price){
-        this.thoga_price=thoga_price;
+    public void setOur_price(double our_Price){
+        this.our_price=our_Price;
     }
     
     public double getOur_price(){
-        return taking_price;
+        return our_price;
     }
     
     public void setWarning(int warning){
@@ -110,7 +121,9 @@ public class Item {
 
     @Override
     public String toString() {
-        return "Item{" + "i_id=" + i_id + ", b_id=" + b_id + ", c_id=" + c_id + '}';
+        return "Item{" + "i_id=" + i_id + ", b_id=" + b_id + ", c_id=" + c_id + ", description=" + description + ", taking_price=" + taking_price + ", thoga_price=" + thoga_price + ", our_price=" + our_price + ", shown_price=" + shown_price + ", warning=" + warning + ", quantity=" + quantity + '}';
     }
+
+   
     
 }

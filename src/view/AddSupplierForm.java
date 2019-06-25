@@ -27,7 +27,7 @@ public class AddSupplierForm extends javax.swing.JFrame {
         controller=new SupplierController();
         initComponents();
         this.setLocationRelativeTo(null);
-        this.setSize(912, 505);
+//        this.setSize(912, 505);
     }
 
     /**
@@ -52,7 +52,8 @@ public class AddSupplierForm extends javax.swing.JFrame {
         sepFour2 = new javax.swing.JSeparator();
         btnSubmit = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Add New");
 
         pnlBase.setBackground(new java.awt.Color(153, 0, 153));
         pnlBase.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -65,7 +66,7 @@ public class AddSupplierForm extends javax.swing.JFrame {
         pnlBase.add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 10, 410, 110));
 
         txtMobile2.setBackground(new java.awt.Color(153, 0, 153));
-        txtMobile2.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        txtMobile2.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         txtMobile2.setForeground(new java.awt.Color(255, 255, 255));
         txtMobile2.setText("Enter mobile number here");
         txtMobile2.setToolTipText("");
@@ -93,7 +94,7 @@ public class AddSupplierForm extends javax.swing.JFrame {
         pnlBase.add(lblMobile, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, 230, 80));
 
         txtName.setBackground(new java.awt.Color(153, 0, 153));
-        txtName.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        txtName.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         txtName.setForeground(new java.awt.Color(255, 255, 255));
         txtName.setText("Enter Name Here");
         txtName.setToolTipText("");
@@ -134,7 +135,7 @@ public class AddSupplierForm extends javax.swing.JFrame {
         pnlBase.add(lblPlus, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 210, 70, 30));
 
         txtMobile1.setBackground(new java.awt.Color(153, 0, 153));
-        txtMobile1.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        txtMobile1.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         txtMobile1.setForeground(new java.awt.Color(255, 255, 255));
         txtMobile1.setText("Enter mobile number here");
         txtMobile1.setToolTipText("");
@@ -216,12 +217,13 @@ public class AddSupplierForm extends javax.swing.JFrame {
             String mob2=txtMobile2.getText();
             ArrayList array=new ArrayList();
             array.add(mob1);
+            if(!mob2.startsWith("E"))
             array.add(mob2);
             boolean isAdded = controller.addSupplier(new Supplier(0, name,array ));
             if(isAdded)
                 this.setVisible(false);
             else{
-                JOptionPane.showMessageDialog(this,"Added Failed", "Something went wrong", JOptionPane.ERROR);
+                JOptionPane.showMessageDialog(this,"Added Failed", "Something went wrong", JOptionPane.ERROR_MESSAGE);
                 txtName.setText("");
                 txtMobile1.setText("");
                 txtMobile2.setText("");

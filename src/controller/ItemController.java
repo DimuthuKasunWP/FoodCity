@@ -16,8 +16,8 @@ public class ItemController {
         dao=new ItemDao();
     }
     
-    public boolean addItem(int item_id,double thoga_price,double quantity,double item_price,int batch_id,double taking_price,double our_price,String item_description,int category_id,int warning) throws SQLException{
-        return dao.addItem(item_description,item_id,category_id,batch_id,taking_price,thoga_price,our_price,warning,quantity);
+    public boolean addItem(long item_id,double thoga_price,double quantity,double item_price,int batch_id,double taking_price,double our_price,String item_description,int category_id,int warning,double shown_price) throws SQLException{
+        return dao.addItem(item_description,item_id,category_id,batch_id,taking_price,thoga_price,our_price,warning,quantity,shown_price);
         
     }
     
@@ -26,7 +26,7 @@ public class ItemController {
         
     }
     
-    public Item getItem(int id) throws SQLException{
+    public Item getItem(long id) throws SQLException{
         
         return dao.getItem(id);
         
@@ -36,7 +36,7 @@ public class ItemController {
         return dao.getAll();
     }
     
-    public boolean deleteItem(int id) throws SQLException{
+    public boolean deleteItem(long id) throws SQLException{
         return dao.deleteItem(id);
     }
     public List<Item> getAllByCategory(String name) throws SQLException{

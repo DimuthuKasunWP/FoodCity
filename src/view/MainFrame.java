@@ -52,12 +52,13 @@ public class MainFrame extends javax.swing.JFrame {
         lblLogin = new javax.swing.JLabel();
         lblUserName = new javax.swing.JLabel();
         sepFour = new javax.swing.JSeparator();
-        password = new javax.swing.JPasswordField();
+        txtPassword = new javax.swing.JPasswordField();
         sepFour1 = new javax.swing.JSeparator();
         txtUserName = new javax.swing.JTextField();
         btnSubmit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Log in");
 
         pnlMain.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -69,13 +70,13 @@ public class MainFrame extends javax.swing.JFrame {
         lblTitle.setFont(new java.awt.Font("Century Gothic", 0, 36)); // NOI18N
         lblTitle.setForeground(new java.awt.Color(255, 255, 255));
         lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTitle.setText("Thogakade");
-        pnlLeft.add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, 410, 110));
+        lblTitle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Asset/rsz_8whatsapp_image_2019-06-23_at_225016.jpg"))); // NOI18N
+        pnlLeft.add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 650, 250));
         pnlLeft.add(sepThree, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 640, 140, 20));
         pnlLeft.add(sepOne, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 620, 410, 20));
         pnlLeft.add(sepTwo, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 630, 260, 20));
 
-        pnlMain.add(pnlLeft, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 650, 750));
+        pnlMain.add(pnlLeft, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 720, 750));
 
         pnlRight.setBackground(new java.awt.Color(36, 47, 65));
         pnlRight.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -85,7 +86,7 @@ public class MainFrame extends javax.swing.JFrame {
         lblPassword.setForeground(new java.awt.Color(255, 255, 255));
         lblPassword.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblPassword.setText("Password");
-        pnlRight.add(lblPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 500, 230, 80));
+        pnlRight.add(lblPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 500, 230, 80));
 
         lblLogin.setBackground(new java.awt.Color(255, 255, 255));
         lblLogin.setFont(new java.awt.Font("Century Gothic", 0, 36)); // NOI18N
@@ -99,24 +100,24 @@ public class MainFrame extends javax.swing.JFrame {
         lblUserName.setForeground(new java.awt.Color(255, 255, 255));
         lblUserName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblUserName.setText("User Name");
-        pnlRight.add(lblUserName, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 340, 230, 80));
-        pnlRight.add(sepFour, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 460, 400, -1));
+        pnlRight.add(lblUserName, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 230, 80));
+        pnlRight.add(sepFour, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 460, 400, -1));
 
-        password.setBackground(new java.awt.Color(36, 47, 65));
-        password.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
-        password.setForeground(new java.awt.Color(255, 255, 255));
-        password.setText("jkjjfdksfdasa");
-        password.setToolTipText("");
-        password.setBorder(null);
-        password.setDisabledTextColor(new java.awt.Color(204, 204, 204));
-        password.setOpaque(false);
-        password.addFocusListener(new java.awt.event.FocusAdapter() {
+        txtPassword.setBackground(new java.awt.Color(36, 47, 65));
+        txtPassword.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        txtPassword.setForeground(new java.awt.Color(255, 255, 255));
+        txtPassword.setText("jkjjfdksfdasa");
+        txtPassword.setToolTipText("");
+        txtPassword.setBorder(null);
+        txtPassword.setDisabledTextColor(new java.awt.Color(204, 204, 204));
+        txtPassword.setOpaque(false);
+        txtPassword.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                passwordFocusGained(evt);
+                txtPasswordFocusGained(evt);
             }
         });
-        pnlRight.add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 580, 400, 30));
-        pnlRight.add(sepFour1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 610, 400, 50));
+        pnlRight.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 580, 400, 30));
+        pnlRight.add(sepFour1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 610, 400, 50));
 
         txtUserName.setBackground(new java.awt.Color(36, 47, 65));
         txtUserName.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
@@ -140,7 +141,7 @@ public class MainFrame extends javax.swing.JFrame {
                 txtUserNameActionPerformed(evt);
             }
         });
-        pnlRight.add(txtUserName, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 430, 400, 30));
+        pnlRight.add(txtUserName, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 430, 400, 30));
 
         btnSubmit.setBackground(new java.awt.Color(102, 255, 153));
         btnSubmit.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
@@ -151,9 +152,9 @@ public class MainFrame extends javax.swing.JFrame {
                 btnSubmitActionPerformed(evt);
             }
         });
-        pnlRight.add(btnSubmit, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 660, 110, 40));
+        pnlRight.add(btnSubmit, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 650, 110, 40));
 
-        pnlMain.add(pnlRight, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, -100, 650, 750));
+        pnlMain.add(pnlRight, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 0, 580, 750));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -180,16 +181,18 @@ public class MainFrame extends javax.swing.JFrame {
         flag=false;
     }//GEN-LAST:event_txtUserNameFocusGained
 
-    private void passwordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passwordFocusGained
-        password.setText("");
-    }//GEN-LAST:event_passwordFocusGained
+    private void txtPasswordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPasswordFocusGained
+        txtPassword.setText("");
+    }//GEN-LAST:event_txtPasswordFocusGained
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
      try {
          String userName=txtUserName.getText();
-         String password=this.password.getPassword().toString();
+         String password=new String(txtPassword.getPassword());
+         System.out.println("password"+password);
          if(controller.Login(userName, password)){
              this.setVisible(false);
+             new DashBoard().setVisible(true);
              
          }
          else{
@@ -247,7 +250,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel lblUserName;
-    private javax.swing.JPasswordField password;
     private javax.swing.JPanel pnlLeft;
     private javax.swing.JPanel pnlMain;
     private javax.swing.JPanel pnlRight;
@@ -256,6 +258,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JSeparator sepOne;
     private javax.swing.JSeparator sepThree;
     private javax.swing.JSeparator sepTwo;
+    private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUserName;
     // End of variables declaration//GEN-END:variables
 }

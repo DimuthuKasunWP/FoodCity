@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -29,25 +30,26 @@ public class DBConnection {
        
         try {
             
-            Class.forName("com.mysql.jdbc.Driver");
-        
-            Properties dbProperties=new Properties();
-            File file=new File("Settings/dbSettings.properties");
-            FileReader dbFileReader =new FileReader(file);
-            dbProperties.load(dbFileReader);
-        
+//            Class.forName("com.mysql.jdbc.Driver");
+//        
+//            Properties dbProperties=new Properties();
+//            File file=new File("Settings/dbSettings.properties");
+//            FileReader dbFileReader =new FileReader(file);
+//            dbProperties.load(dbFileReader);
+//        
             String url="jdbc:mysql://"
-                    +dbProperties.getProperty("ip")
+                    +"localhost"
                     +"/"
-                    +dbProperties.getProperty("database");
+                    +"thogakade"+"?useUnicode=true&characterEncoding=utf8";
 
-            String userName=dbProperties.getProperty("userName");
-            String password=dbProperties.getProperty("password");
+//            String userName=dbProperties.getProperty("userName");
+//            String password=dbProperties.getProperty("password");
         
         
-            connection=DriverManager.getConnection(url,userName,password);
+            connection=DriverManager.getConnection(url,"root","");
       
-        } catch (SQLException | IOException | ClassNotFoundException ex) {
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,ex);
             Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

@@ -6,6 +6,7 @@
 package model;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  *
@@ -15,6 +16,16 @@ public class Orders {
     private int o_id;
     private Timestamp time;
     private double profit;
+    private Date date;
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+    
 
     public double getProfit() {
         return profit;

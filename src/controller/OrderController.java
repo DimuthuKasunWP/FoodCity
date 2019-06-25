@@ -6,6 +6,7 @@
 package controller;
 
 import dao.OrderDao;
+import java.sql.SQLException;
 import java.util.List;
 import model.OrderDetail;
 import model.Orders;
@@ -24,6 +25,15 @@ public class OrderController {
     
     public boolean placeOrder(Orders order,List<OrderDetail> details){
         return dao.placeOrder(order, details);
+    }
+    
+     public List<Orders> getAll() throws SQLException{
+        
+       return dao.getAll();
+    }
+    
+    public List<Orders> getOrderProfit() throws SQLException{
+        return dao.getProfit();
     }
     
 }

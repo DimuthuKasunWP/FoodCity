@@ -25,6 +25,7 @@ public class BatchDao {
     private SupplierDao dao;
   
     public BatchDao() {
+        dao=new SupplierDao();
         connection=DBConnection.getInstance().getConnection();
 
     }

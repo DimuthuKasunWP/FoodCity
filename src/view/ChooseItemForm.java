@@ -5,13 +5,16 @@
  */
 package view;
 
+import Font.FontLoader;
 import controller.CategoryController;
 import controller.ItemController;
+import java.awt.Font;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import model.Category;
 import model.Item;
@@ -31,7 +34,7 @@ public class ChooseItemForm extends javax.swing.JFrame {
         controller=new CategoryController();
         itemController=new ItemController();
         initComponents();
-        this.setSize(1189,744);
+//        this.setSize(1189,744);
         this.setLocationRelativeTo(null);
         loadCombo();
     }
@@ -43,6 +46,7 @@ public class ChooseItemForm extends javax.swing.JFrame {
         this.setSize(1189,744);
         this.setLocationRelativeTo(null);
         loadCombo();
+        view_details.setFont(FontLoader.loadFont(16, Font.PLAIN));
     }
     private void loadCombo(){
         cmbCategory.removeAllItems();
@@ -65,7 +69,7 @@ public class ChooseItemForm extends javax.swing.JFrame {
             String  selectedItem = (String) cmbCategory.getSelectedItem();
             List<Item> all = itemController.getAllByCategory(selectedItem);
             for (Item elem : all) {
-                Object[] row={elem.getI_id(),elem.getC_id(),elem.getDescription(),elem.getTaking_price(),elem.getThoga_price(),elem.getOur_price(),elem.getQuantity()};
+                Object[] row={elem.getI_id(),elem.getC_id(),elem.getDescription(),elem.getTaking_price(),elem.getThoga_price(),elem.getShown_price(),elem.getOur_price(),elem.getQuantity()};
                 dtm.addRow(row);
             }
         } catch (SQLException ex) {
@@ -90,7 +94,7 @@ public class ChooseItemForm extends javax.swing.JFrame {
         btnSelect = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Select Category");
+        setTitle("Select Ctegory");
 
         pnlBase.setBackground(new java.awt.Color(153, 0, 153));
         pnlBase.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -106,28 +110,21 @@ public class ChooseItemForm extends javax.swing.JFrame {
         lblCategory.setText("Choose Category");
         pnlBase.add(lblCategory, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, 390, 70));
 
-        view_details.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        view_details.setFont(new java.awt.Font("Nirmala UI", 0, 24)); // NOI18N
         view_details.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Item ID", "Category ID", "Description", "Taking Price", "Thoga Price", "Our Price", "Quantity"
+                "Item ID", "Category ID", "Description", "Taking Price", "Thoga Price", "Shown_Price", "Our Price", "Quantity"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                java.lang.Long.class, java.lang.Integer.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
             }
         });
         jScrollPane1.setViewportView(view_details);
@@ -153,7 +150,7 @@ public class ChooseItemForm extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlBase, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 744, Short.MAX_VALUE)
+            .addComponent(pnlBase, javax.swing.GroupLayout.DEFAULT_SIZE, 744, Short.MAX_VALUE)
         );
 
         pack();
@@ -165,16 +162,17 @@ public class ChooseItemForm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "select only one row at time", "Warning", JOptionPane.WARNING_MESSAGE);
       }
         else if(view_details.getSelectedRowCount()==0)
-            JOptionPane.showMessageDialog(this, "Please select a row", "Warning", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "select one row at time", "Warning", JOptionPane.WARNING_MESSAGE);
         else{
-            int  id = (int) dtm.getValueAt(view_details.getSelectedRow(), 0);
+            long  id = (long) dtm.getValueAt(view_details.getSelectedRow(), 0);
             int category_id= (int) dtm.getValueAt(view_details.getSelectedRow(), 1);
              String desctiption =(String) dtm.getValueAt(view_details.getSelectedRow(), 2);
             double taking_price=(double) dtm.getValueAt(view_details.getSelectedRow(), 3);
              double thoga_price= (double) dtm.getValueAt(view_details.getSelectedRow(), 4);
-             double our_price= (double) dtm.getValueAt(view_details.getSelectedRow(), 5);
-             double qty=(double) dtm.getValueAt(view_details.getSelectedRow(), 6);
-           Item item=new Item(id, 0, category_id, desctiption, taking_price, thoga_price, our_price, 0, qty);
+             double our_price= (double) dtm.getValueAt(view_details.getSelectedRow(), 6);
+             double shown_price=(double) dtm.getValueAt(view_details.getSelectedRow(), 5);
+             double qty=(double) dtm.getValueAt(view_details.getSelectedRow(), 7);
+           Item item=new Item(id, 0, category_id, desctiption, taking_price, thoga_price, our_price,shown_price, 0, qty);
 //           DashBoard board=new DashBoard();
             board.loadData(item);
            this.dispose();
@@ -192,10 +190,7 @@ public class ChooseItemForm extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
+               UIManager.setLookAndFeel("com.jtattoo.plaf.acryl.AcrylLookAndFeel");    
             }
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(ChooseItemForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
